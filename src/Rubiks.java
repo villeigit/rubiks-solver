@@ -24,7 +24,7 @@ public class Rubiks {
 
         Scanner lukija = new Scanner(System.in);
         while (true) {
-            System.out.print("Anna kiertosuunta (D tai U): ");
+            System.out.print("Anna kiertosuunta D, U tai R (tai UUSI): ");
             String syote = lukija.nextLine();
             if (syote.equals("D")) {
                 kuutio.liikutaD();
@@ -33,6 +33,16 @@ public class Rubiks {
             }
             if (syote.equals("U")) {
                 kuutio.liikutaU();
+                kuutio.tulostaKuutio();
+                System.out.println();
+            }
+            if (syote.equals("R")) {
+                kuutio.liikutaR();
+                kuutio.tulostaKuutio();
+                System.out.println();
+            }
+            if (syote.equals("UUSI")) {
+                kuutio = new Kuutio();
                 kuutio.tulostaKuutio();
                 System.out.println();
             }
@@ -126,7 +136,10 @@ public class Rubiks {
          * 4 = vihreä
          * 5 = oranssi (ei onnistu ANSI:lla konsolista) --> violetti
          * 6 = valkoinen
+         * 
+         * 
          */
+        //TODO: Tulostus ei toimi Windowsin konsolissa
         public void tulostaVari(int numero) {
             if (numero == 1) {
                 System.out.print(ANSI_YELLOW +" "+ numero +" "+ ANSI_RESET);
@@ -270,6 +283,82 @@ public class Rubiks {
             uusiTila[6][3] = this.tila[3][2];
             uusiTila[6][4] = this.tila[4][2];
             uusiTila[6][5] = this.tila[5][2];
+
+            this.tila = uusiTila;
+        }
+
+        /**
+         * Liikuttaa kuution oikeaa puolta myötäpäivään yhden kierroksen
+         * 
+         * Lähtöasetelma koordinaateissa:
+         * - - - - - - - - - - - 1 1
+         * - 0 1 2 3 4 5 6 7 8 9 0 1
+         * 
+         * 0 - - - 4 4 4
+         * 1 - - - 4 4 4
+         * 2 - - - 4 4 4
+         * 3 5 5 5 1 1 1 3 3 3 6 6 6
+         * 4 5 5 5 1 1 1 3 3 3 6 6 6
+         * 5 5 5 5 1 1 1 3 3 3 6 6 6
+         * 6 - - - 2 2 2
+         * 7 - - - 2 2 2
+         * 8 - - - 2 2 2
+         * 
+         * Vaikutukset riveillä:
+         * [0] 5
+         * [1] 5
+         * [2] 5
+         * [3] 5 6 7 8 9
+         * [4] 5 6 8 9 10 11 (7 ei muutu, keskellä)
+         * [5] 5 6 7 8 9 10 11 
+         * [6] 5
+         * [7] 5
+         * [8] 5
+         */
+        public void liikutaR() {
+            int[][] uusiTila = new int[tila.length][];
+            for (int i = 0; i < tila.length; i++) {
+                uusiTila[i] = tila[i].clone();
+            }
+
+            // rivi 0
+            uusiTila[0][5] = this.tila[3][5];
+
+            // rivi 1
+            uusiTila[1][5] = this.tila[4][5];
+
+            // rivi 2
+            uusiTila[2][5] = this.tila[5][5];
+
+            // rivi 3
+            uusiTila[3][5] = this.tila[6][5];
+            uusiTila[3][6] = this.tila[5][6];
+            uusiTila[3][7] = this.tila[4][6];
+            uusiTila[3][8] = this.tila[3][6];
+            uusiTila[3][9] = this.tila[2][5];
+
+            // rivi 4
+            uusiTila[4][5] = this.tila[7][5];
+            uusiTila[4][6] = this.tila[5][7];
+            uusiTila[4][8] = this.tila[3][7];
+            uusiTila[4][9] = this.tila[1][5];
+
+            // rivi 5
+            uusiTila[5][5] = this.tila[8][5];
+            uusiTila[5][6] = this.tila[5][8];
+            uusiTila[5][7] = this.tila[4][8];
+            uusiTila[5][8] = this.tila[3][8];
+            uusiTila[5][9] = this.tila[0][5];
+            
+            // rivi 6
+            uusiTila[6][5] = this.tila[5][9];
+
+            
+            // rivi 7
+            uusiTila[7][5] = this.tila[4][9];
+            
+            // rivi 8
+            uusiTila[8][5] = this.tila[3][9];
 
             this.tila = uusiTila;
         }

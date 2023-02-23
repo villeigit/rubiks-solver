@@ -24,10 +24,20 @@ public class Rubiks {
 
         Scanner lukija = new Scanner(System.in);
         while (true) {
-            System.out.print("Anna kiertosuunta D, U tai R (tai UUSI): ");
+            
+            System.out.println("Kiertosuunnat myötäpäivään: F, B, U, D, R, L");
+            System.out.println("Kiertosuunnat vastapäivään: f, b, u, d, r, l");
+            System.out.println("Resetointi: UUSI");
+            System.out.print("Anna kiertosuunta: ");
+           
             String syote = lukija.nextLine();
             if (syote.equals("D")) {
                 kuutio.liikutaD();
+                kuutio.tulostaKuutio();
+                System.out.println();
+            }
+            if (syote.equals("d")) {
+                kuutio.liikutaDi();
                 kuutio.tulostaKuutio();
                 System.out.println();
             }
@@ -36,8 +46,18 @@ public class Rubiks {
                 kuutio.tulostaKuutio();
                 System.out.println();
             }
+            if (syote.equals("u")) {
+                kuutio.liikutaUi();
+                kuutio.tulostaKuutio();
+                System.out.println();
+            }
             if (syote.equals("R")) {
                 kuutio.liikutaR();
+                kuutio.tulostaKuutio();
+                System.out.println();
+            }
+            if (syote.equals("r")) {
+                kuutio.liikutaRi();
                 kuutio.tulostaKuutio();
                 System.out.println();
             }
@@ -46,8 +66,28 @@ public class Rubiks {
                 kuutio.tulostaKuutio();
                 System.out.println();
             }
+            if (syote.equals("l")) {
+                kuutio.liikutaLi();
+                kuutio.tulostaKuutio();
+                System.out.println();
+            }
             if (syote.equals("F")) {
                 kuutio.liikutaF();
+                kuutio.tulostaKuutio();
+                System.out.println();
+            }
+            if (syote.equals("f")) {
+                kuutio.liikutaFi();
+                kuutio.tulostaKuutio();
+                System.out.println();
+            }
+            if (syote.equals("B")) {
+                kuutio.liikutaB();
+                kuutio.tulostaKuutio();
+                System.out.println();
+            }
+            if (syote.equals("b")) {
+                kuutio.liikutaB();
                 kuutio.tulostaKuutio();
                 System.out.println();
             }
@@ -506,6 +546,158 @@ public class Rubiks {
             uusiTila[8][5] = this.tila[6][5];
 
             this.tila = uusiTila;
+        }
+
+        /**
+         * Liikuttaa kuution etupuolta myötäpäivään yhden kierroksen
+         * 
+         * Lähtöasetelma koordinaateissa:
+         * - - - - - - - - - - - 1 1
+         * - 0 1 2 3 4 5 6 7 8 9 0 1
+         * 
+         * 0 - - - 4 4 4
+         * 1 - - - 4 4 4
+         * 2 - - - 4 4 4
+         * 3 5 5 5 1 1 1 3 3 3 6 6 6
+         * 4 5 5 5 1 1 1 3 3 3 6 6 6
+         * 5 5 5 5 1 1 1 3 3 3 6 6 6
+         * 6 - - - 2 2 2
+         * 7 - - - 2 2 2
+         * 8 - - - 2 2 2
+         * 
+         * Vaikutukset riveillä:
+         * [0] - - - 3 4 5
+         * [1] - - - 3 - 5
+         * [2] - - - 3 4 5
+         * [3] 0 1 2 3 4 5 6 7 8 9 10 11 
+         */
+
+         public void liikutaB() {
+            int[][] uusiTila = new int[tila.length][];
+            for (int i = 0; i < tila.length; i++) {
+                uusiTila[i] = tila[i].clone();
+            }
+
+            // rivi 0
+            uusiTila[0][3] = this.tila[2][3];
+            uusiTila[0][4] = this.tila[1][3];
+            uusiTila[0][5] = this.tila[0][3];
+            
+            
+            // rivi 1
+            uusiTila[1][3] = this.tila[1][4];
+            uusiTila[1][5] = this.tila[0][4];
+ 
+            // rivi 2
+            uusiTila[2][3] = this.tila[2][5];
+            uusiTila[2][4] = this.tila[1][5];
+            uusiTila[2][5] = this.tila[0][5];
+            
+            // rivi 3
+            uusiTila[3][0] = this.tila[3][3];
+            uusiTila[3][1] = this.tila[3][4];
+            uusiTila[3][2] = this.tila[3][5];
+            uusiTila[3][3] = this.tila[3][6];
+            uusiTila[3][4] = this.tila[3][7];
+            uusiTila[3][5] = this.tila[3][8];
+            uusiTila[3][6] = this.tila[3][9];
+            uusiTila[3][7] = this.tila[3][10];
+            uusiTila[3][8] = this.tila[3][11];
+            uusiTila[3][9] = this.tila[3][0];
+            uusiTila[3][10] = this.tila[3][1];
+            uusiTila[3][11] = this.tila[3][2];
+
+            this.tila = uusiTila;
+        }
+
+        /**
+         * Liikuttaa kuution etupuolta VASTApäivään yhden kierroksen
+         * Toteutus kolmella myötäpäivään pyöräytyksellä 
+         */
+
+        public void liikutaFi() {
+            int[][] uusiTila = new int[tila.length][];
+            for (int i = 0; i < tila.length; i++) {
+                uusiTila[i] = tila[i].clone();
+            }
+            liikutaF();
+            liikutaF();
+            liikutaF();
+        }
+
+        /**
+         * Liikuttaa kuution takapuolta VASTApäivään yhden kierroksen
+         * Toteutus kolmella myötäpäivään pyöräytyksellä 
+         */
+
+         public void liikutaBi() {
+            int[][] uusiTila = new int[tila.length][];
+            for (int i = 0; i < tila.length; i++) {
+                uusiTila[i] = tila[i].clone();
+            }
+            liikutaB();
+            liikutaB();
+            liikutaB();
+        }
+
+        /**
+         * Liikuttaa kuution oikeaa puolta VASTApäivään yhden kierroksen
+         * Toteutus kolmella myötäpäivään pyöräytyksellä 
+         */
+
+         public void liikutaRi() {
+            int[][] uusiTila = new int[tila.length][];
+            for (int i = 0; i < tila.length; i++) {
+                uusiTila[i] = tila[i].clone();
+            }
+            liikutaR();
+            liikutaR();
+            liikutaR();
+        }
+
+        /**
+         * Liikuttaa kuution vasenta puolta VASTApäivään yhden kierroksen
+         * Toteutus kolmella myötäpäivään pyöräytyksellä 
+         */
+
+         public void liikutaLi() {
+            int[][] uusiTila = new int[tila.length][];
+            for (int i = 0; i < tila.length; i++) {
+                uusiTila[i] = tila[i].clone();
+            }
+            liikutaL();
+            liikutaL();
+            liikutaL();
+        }
+
+        /**
+         * Liikuttaa kuution yläpuolta VASTApäivään yhden kierroksen
+         * Toteutus kolmella myötäpäivään pyöräytyksellä 
+         */
+
+         public void liikutaUi() {
+            int[][] uusiTila = new int[tila.length][];
+            for (int i = 0; i < tila.length; i++) {
+                uusiTila[i] = tila[i].clone();
+            }
+            liikutaU();
+            liikutaU();
+            liikutaU();
+        }
+
+        /**
+         * Liikuttaa kuution alapuolta VASTApäivään yhden kierroksen
+         * Toteutus kolmella myötäpäivään pyöräytyksellä 
+         */
+
+         public void liikutaDi() {
+            int[][] uusiTila = new int[tila.length][];
+            for (int i = 0; i < tila.length; i++) {
+                uusiTila[i] = tila[i].clone();
+            }
+            liikutaD();
+            liikutaD();
+            liikutaD();
         }
     }
 }

@@ -21,7 +21,7 @@ public class Rubiks {
         System.out.println("");
         // kuutio.liikutaD();
         // kuutio.tulostaKuutio();
-    
+
         Scanner lukija = new Scanner(System.in);
         while (true) {
             System.out.print("Anna kiertosuunta (D tai U): ");
@@ -46,7 +46,19 @@ public class Rubiks {
      */
 
     static class Kuutio {
+
         private int[][] tila;
+
+        // Luodaan värit
+        // Declaring ANSI_RESET so that we can reset the color
+        public static final String ANSI_RESET = "\u001B[0m";
+
+        public static final String ANSI_YELLOW = "\u001B[43m";
+        public static final String ANSI_BLUE = "\u001B[44m";
+        public static final String ANSI_RED = "\u001B[41m";
+        public static final String ANSI_GREEN = "\u001B[42m";
+        public static final String ANSI_PURPLE = "\u001B[45m";
+        public static final String ANSI_WHITE = "\u001B[47m";
 
         public Kuutio() {
             this.tila = luoKuutio();
@@ -60,7 +72,7 @@ public class Rubiks {
          * 2 = sininen
          * 3 = punainen
          * 4 = vihreä
-         * 5 = oranssi
+         * 5 = oranssi (ei onnistu ANSI:lla konsolista) --> violetti
          * 6 = valkoinen
          * 
          * Värit ja kuution asettelu vastaavat oikeaa rubikin kuutiota
@@ -95,12 +107,44 @@ public class Rubiks {
             for (int i = 0; i < this.tila.length; i++) {
                 for (int j = 0; j < this.tila[i].length; j++) {
                     if (this.tila[i][j] == 0) {
-                        System.out.print("  ");
+                        System.out.print("   ");
                     } else {
-                        System.out.print(this.tila[i][j] + " ");
+                        tulostaVari(this.tila[i][j]);
                     }
                 }
                 System.out.println("");
+            }
+        }
+
+        /**
+         * Tulostetaan numerot värillisenä
+         * Numerot vastaavat värejä seuraavasti:
+         * 0 = tyhjä
+         * 1 = keltainen
+         * 2 = sininen
+         * 3 = punainen
+         * 4 = vihreä
+         * 5 = oranssi (ei onnistu ANSI:lla konsolista) --> violetti
+         * 6 = valkoinen
+         */
+        public void tulostaVari(int numero) {
+            if (numero == 1) {
+                System.out.print(ANSI_YELLOW +" "+ numero +" "+ ANSI_RESET);
+            }
+            if (numero == 2) {
+                System.out.print(ANSI_BLUE +" "+ numero +" "+ ANSI_RESET);
+            }
+            if (numero == 3) {
+                System.out.print(ANSI_RED +" "+ numero +" "+ ANSI_RESET);
+            }
+            if (numero == 4) {
+                System.out.print(ANSI_GREEN +" "+ numero +" "+ ANSI_RESET);
+            }
+            if (numero == 5) {
+                System.out.print(ANSI_PURPLE +" "+ numero +" "+ ANSI_RESET);
+            }
+            if (numero == 6) {
+                System.out.print(ANSI_WHITE +" "+ numero +" "+ ANSI_RESET);
             }
         }
 

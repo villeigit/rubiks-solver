@@ -2,6 +2,7 @@ package src;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Virtuaalinen rubikin kuutio ja ratkaisija
@@ -97,40 +98,49 @@ public class Rubiks {
                 System.out.println();
             }
 
-            //TODO Testi Whitecrossin tarkastukseen, poista kun valmista
+            // TODO Testi Whitecrossin tarkastukseen, poista kun valmista
             if (syote.equals("wc")) {
-                if(kuutio.tarkastaWhitecross()) {
+                if (kuutio.tarkastaWhitecross()) {
                     System.out.println("Whitecross!");
-                }
-                else System.out.println("Ei Whitecrossia");  
+                } else
+                    System.out.println("Ei Whitecrossia");
             }
-            //TODO Testi Alareunan tarkastukseen, poista kun valmista
+            // TODO Testi Alareunan tarkastukseen, poista kun valmista
             if (syote.equals("ala")) {
-                if(kuutio.tarkastaAlareuna()) {
+                if (kuutio.tarkastaAlareuna()) {
                     System.out.println("Alareuna!");
-                }
-                else System.out.println("Ei alareunaa");
+                } else
+                    System.out.println("Ei alareunaa");
             }
-            //TODO Testi Keskireunan tarkastukseen, poista kun valmista
+            // TODO Testi Keskireunan tarkastukseen, poista kun valmista
             if (syote.equals("keski")) {
-                if(kuutio.tarkastaKeskireuna()) {
+                if (kuutio.tarkastaKeskireuna()) {
                     System.out.println("Keskireuna!");
-                }
-                else System.out.println("Ei keskireunaa");
+                } else
+                    System.out.println("Ei keskireunaa");
             }
-            //TODO Testi Yellowcrossin tarkastukseen, poista kun valmista
+            // TODO Testi Yellowcrossin tarkastukseen, poista kun valmista
             if (syote.equals("keski")) {
-                if(kuutio.tarkastaYellowcross()) {
+                if (kuutio.tarkastaYellowcross()) {
                     System.out.println("Yellowcross!");
-                }
-                else System.out.println("Ei Yellowcrossia");
+                } else
+                    System.out.println("Ei Yellowcrossia");
             }
-            //TODO Testi Yellowcrossin tarkastukseen, poista kun valmista
+            // TODO Testi Yellowcrossin tarkastukseen, poista kun valmista
             if (syote.equals("kuutio")) {
-                if(kuutio.tarkastaKuutio()) {
+                if (kuutio.tarkastaKuutio()) {
                     System.out.println("Oikein!");
-                }
-                else System.out.println("Väärin");
+                } else
+                    System.out.println("Väärin");
+            }
+
+            // TODO Testi Yellowcrossin tarkastukseen, poista kun valmista
+            if (syote.equals("ratkaise")) {
+                System.out.println("Ratkaistaan...");
+                kuutio.ratkaiseWhitecross();
+                System.out.println("Valmis...");
+                kuutio.tulostaKuutio();
+                ;
             }
         }
     }
@@ -278,7 +288,7 @@ public class Rubiks {
             }
 
             // rivi 0 muutokset
-            uusiTila[0][3] = this.tila[3][8];
+            uusiTila[0][3] = this.tila[5][8];
             uusiTila[0][4] = this.tila[4][8];
             uusiTila[0][5] = this.tila[5][8];
 
@@ -341,34 +351,34 @@ public class Rubiks {
             }
 
             // rivi 2 muutokset
-            uusiTila[2][3] = this.tila[3][6];
-            uusiTila[2][4] = this.tila[4][6];
-            uusiTila[2][5] = this.tila[5][6];
+            uusiTila[2][3] = this.tila[5][2];
+            uusiTila[2][4] = this.tila[4][2];
+            uusiTila[2][5] = this.tila[3][2];
 
             // rivi 3 muutokset
-            uusiTila[3][2] = this.tila[2][5];
-            uusiTila[3][3] = this.tila[3][5];
-            uusiTila[3][4] = this.tila[4][5];
-            uusiTila[3][5] = this.tila[5][5];
-            uusiTila[3][6] = this.tila[6][5];
+            uusiTila[3][2] = this.tila[6][3];
+            uusiTila[3][3] = this.tila[5][3];
+            uusiTila[3][4] = this.tila[4][3];
+            uusiTila[3][5] = this.tila[3][3];
+            uusiTila[3][6] = this.tila[2][3];
 
             // rivi 4 muutokset
-            uusiTila[4][2] = this.tila[2][4];
-            uusiTila[4][3] = this.tila[3][4];
-            uusiTila[4][5] = this.tila[5][4];
-            uusiTila[4][6] = this.tila[6][4];
+            uusiTila[4][2] = this.tila[6][4];
+            uusiTila[4][3] = this.tila[5][4];
+            uusiTila[4][5] = this.tila[3][4];
+            uusiTila[4][6] = this.tila[2][4];
 
             // rivi 5 muutokset
-            uusiTila[5][2] = this.tila[2][3];
-            uusiTila[5][3] = this.tila[3][3];
-            uusiTila[5][4] = this.tila[4][3];
-            uusiTila[5][5] = this.tila[5][3];
-            uusiTila[5][6] = this.tila[6][3];
+            uusiTila[5][2] = this.tila[6][5];
+            uusiTila[5][3] = this.tila[5][5];
+            uusiTila[5][4] = this.tila[4][5];
+            uusiTila[5][5] = this.tila[3][5];
+            uusiTila[5][6] = this.tila[2][5];
 
             // rivi 6 muutokset
-            uusiTila[6][3] = this.tila[3][2];
-            uusiTila[6][4] = this.tila[4][2];
-            uusiTila[6][5] = this.tila[5][2];
+            uusiTila[6][3] = this.tila[5][6];
+            uusiTila[6][4] = this.tila[4][6];
+            uusiTila[6][5] = this.tila[3][6];
 
             this.tila = uusiTila;
         }
@@ -511,13 +521,13 @@ public class Rubiks {
             uusiTila[5][11] = this.tila[6][3];
 
             // rivi 6
-            uusiTila[6][3] = this.tila[5][3];
+            uusiTila[6][3] = this.tila[3][3];
 
             // rivi 7
             uusiTila[7][3] = this.tila[4][3];
 
             // rivi 8
-            uusiTila[8][3] = this.tila[3][3];
+            uusiTila[8][3] = this.tila[5][3];
 
             this.tila = uusiTila;
         }
@@ -577,7 +587,7 @@ public class Rubiks {
 
             // rivi 8
             uusiTila[8][3] = this.tila[8][5];
-            uusiTila[8][4] = this.tila[7][4];
+            uusiTila[8][4] = this.tila[7][5];
             uusiTila[8][5] = this.tila[6][5];
 
             this.tila = uusiTila;
@@ -619,7 +629,7 @@ public class Rubiks {
             uusiTila[0][5] = this.tila[0][3];
 
             // rivi 1
-            uusiTila[1][3] = this.tila[1][4];
+            uusiTila[1][3] = this.tila[2][4];
             uusiTila[1][5] = this.tila[0][4];
 
             // rivi 2
@@ -737,7 +747,8 @@ public class Rubiks {
         /**
          * "Whitecross":in selvittäminen
          * Whitecross = tilanne jossa kuution pohjassa on valkoinen risti ja ristin osat
-         * ovat oikeilla sivuilla (sivut oikein kun sivun keskimmäinen pala ja keskimmäinen alin pala ovat samat)
+         * ovat oikeilla sivuilla (sivut oikein kun sivun keskimmäinen pala ja
+         * keskimmäinen alin pala ovat samat)
          * Tarkastaa pohjan ja sivujen toteutumisen ja jos ei toteudu palautaa FALSE
          * Jos toteutuu, palauttaa TRUE
          */
@@ -757,12 +768,13 @@ public class Rubiks {
 
         /**
          * Alareunan tilanteen tarkastus
-         * Whitecrossia seuraavaa vaihe, jossa kuution pohja (valkoinen) ja kaikki alimmat rivit sivuilta ovat kunnossa
+         * Whitecrossia seuraavaa vaihe, jossa kuution pohja (valkoinen) ja kaikki
+         * alimmat rivit sivuilta ovat kunnossa
          */
         public boolean tarkastaAlareuna() {
 
-            //Whitecrossin tarkastus riittää pohjan tarkastamiseksi
-            if(!tarkastaWhitecross()) {
+            // Whitecrossin tarkastus riittää pohjan tarkastamiseksi
+            if (!tarkastaWhitecross()) {
                 return false;
             }
             // 1 sivun tarkastus
@@ -786,12 +798,13 @@ public class Rubiks {
 
         /**
          * Keskireunan tilanteen tarkastus
-         * Alareunaa seuraavaa vaihe, jossa kuution pohja (valkoinen) ja kaksi alinta riviä sivuilta ovat kunnossa
+         * Alareunaa seuraavaa vaihe, jossa kuution pohja (valkoinen) ja kaksi alinta
+         * riviä sivuilta ovat kunnossa
          */
         public boolean tarkastaKeskireuna() {
 
-            //Tarkastetaan alareuna
-            if(!tarkastaAlareuna()) {
+            // Tarkastetaan alareuna
+            if (!tarkastaAlareuna()) {
                 return false;
             }
             // 1 sivun tarkastus
@@ -816,13 +829,14 @@ public class Rubiks {
         /**
          * "Yellowcrossin":in selvittäminen
          * Yellowcross = tilanne jossa kuution päällä on keltainen risti ja ristin osat
-         * ovat oikeilla sivuilla (sivut oikein kun ylärivin keskimmäinen pala ja kaksi alintariviä ovat samaa väriä
+         * ovat oikeilla sivuilla (sivut oikein kun ylärivin keskimmäinen pala ja kaksi
+         * alintariviä ovat samaa väriä
          * Tarkastaa keskirivin toteutumisen ja jos ei toteudu palautaa FALSE
          * Jos toteutuu, palauttaa TRUE
          */
         public boolean tarkastaYellowcross() {
 
-            if(!tarkastaKeskireuna()) {
+            if (!tarkastaKeskireuna()) {
                 return false;
             }
 
@@ -844,7 +858,7 @@ public class Rubiks {
          * Jos toteutuu, palauttaa TRUE
          */
         public boolean tarkastaKuutio() {
-            if(!tarkastaYellowcross()) {
+            if (!tarkastaYellowcross()) {
                 return false;
             }
 
@@ -853,7 +867,7 @@ public class Rubiks {
                 return false;
             }
             // 2 sivun tarkastus
-            if (!(tila[3][2]== tila[4][2] && tila[4][2] == tila[5][2])) {
+            if (!(tila[3][2] == tila[4][2] && tila[4][2] == tila[5][2])) {
                 return false;
             }
             // 3 sivun tarkastus
@@ -865,6 +879,235 @@ public class Rubiks {
                 return false;
             }
             return true;
+        }
+
+        public void ratkaiseWhitecross() {
+            while (!(tarkastaWhitecross())) {
+                ratkaiseWhitecrossYla();
+                this.tulostaKuutio();
+                ratkaiseWhitecrossSivu();
+                ratkaiseWhitecrossAla();
+            }
+        }
+
+        public void ratkaiseWhitecrossYla() {
+
+            int yla = tila[3][4];
+            int oikea = tila[4][5];
+            int ala = tila[5][4];
+            int vasen = tila[4][3];
+            int ylaSivu = tila[2][4];
+            int oikeaSivu = tila[4][6];
+            int alaSivu = tila[6][4];
+            int vasenSivu = tila[4][2];
+
+            if (yla == 6) {
+                if (ylaSivu == 5) {
+                    liikutaU();
+                    liikutaU();
+                    liikutaU();
+                    kaannaWhitecrossYla(ylaSivu);
+                }
+
+                else if (ylaSivu == 4) {
+                    kaannaWhitecrossYla(ylaSivu);
+                }
+                else if (ylaSivu == 3) {
+                    liikutaU();
+                    kaannaWhitecrossYla(ylaSivu);
+                }
+                else if (ylaSivu == 2) {
+                    liikutaU();
+                    liikutaU();
+                    kaannaWhitecrossYla(ylaSivu);
+                }
+
+            }
+
+            else if (oikea == 6) {
+                if (oikeaSivu == 5) {
+                    liikutaU();
+                    liikutaU();
+                    kaannaWhitecrossYla(oikeaSivu);
+                }
+                else if (oikeaSivu == 4) {
+                    liikutaU();
+                    liikutaU();
+                    liikutaU();
+                    kaannaWhitecrossYla(oikeaSivu);
+                }
+                else if (oikeaSivu == 3) {
+                    kaannaWhitecrossYla(oikeaSivu);
+                }
+                else if (oikeaSivu == 2) {
+                    liikutaU();
+                    kaannaWhitecrossYla(oikeaSivu);
+                }
+            }
+
+            else if (ala == 6) {
+                if (alaSivu == 5) {
+                    liikutaU();
+                    liikutaU();
+                    liikutaU();
+                    kaannaWhitecrossYla(alaSivu);
+                }
+                else if (alaSivu == 4) {
+                    liikutaU();
+                    liikutaU();
+                    kaannaWhitecrossYla(alaSivu);
+                }
+                else if (alaSivu == 3) {
+                    liikutaU();
+                    kaannaWhitecrossYla(alaSivu);
+                }
+                else if (alaSivu == 2) {
+                    kaannaWhitecrossYla(alaSivu);
+                }
+            }
+
+            else if (vasen == 6) {
+                if (vasenSivu == 5) {
+                    kaannaWhitecrossYla(vasenSivu);
+                }
+                else if (vasenSivu == 4) {
+                    liikutaU();
+                    liikutaU();
+                    liikutaU();
+                    kaannaWhitecrossYla(vasenSivu);
+                }
+                else if (vasenSivu == 3) {
+                    liikutaU();
+                    liikutaU();
+                    kaannaWhitecrossYla(vasenSivu);
+                }
+                else if (vasenSivu == 2) {
+                    liikutaU();
+                    kaannaWhitecrossYla(vasenSivu);
+                }
+            }
+
+        }
+
+        public void kaannaWhitecrossYla(int vari) {
+
+            if (vari == 2) {
+                liikutaF();
+                liikutaF();
+            }
+            if (vari == 3)
+                liikutaR();
+                liikutaR();
+
+            if (vari == 4) {
+                liikutaB();
+                liikutaB();
+            }
+
+            if (vari == 5) {
+                liikutaL();
+                liikutaL();
+            }
+
+        }
+
+        public void ratkaiseWhitecrossSivu() {
+            int etuVasen = tila[7][3];
+            int etuOikea = tila[7][5];  
+            int vasenVasen = tila[3][1];
+            int vasenOikea = tila[5][1];
+            int takaVasen = tila[1][5];
+            int takaOikea = tila[1][3];
+            int oikeaVasen = tila[5][7];
+            int oikeaOikea = tila[3][7];
+
+            int etuKeski = tila[6][4];
+            int vasenKeski = tila[4][2];
+            int takaKeski = tila[2][4];
+            int oikeaKeski = tila[4][6];
+
+            if (etuVasen == 6) {
+                liikutaLi();
+                liikutaU();
+                liikutaL();
+            }
+
+            else if (etuOikea == 6) {
+                liikutaR();
+                liikutaU();
+                liikutaRi();
+            }
+
+            else if (vasenVasen == 6) {
+                liikutaBi();
+                liikutaU();
+                liikutaB();
+            } else if (vasenOikea == 6) {
+                liikutaF();
+                liikutaU();
+                liikutaFi();
+            } else if (takaVasen == 6) {
+                liikutaRi();
+                liikutaU();
+                liikutaR();
+            } else if (takaOikea == 6) {
+                liikutaL();
+                liikutaU();
+                liikutaLi();
+            } else if (oikeaVasen == 6) {
+                liikutaFi();
+                liikutaU();
+                liikutaF();
+            } else if (oikeaOikea == 6) {
+                liikutaB();
+                liikutaU();
+                liikutaBi();
+            }
+            else if (etuKeski == 6) {
+                liikutaF();
+                liikutaR();
+                liikutaFi();
+            }
+            else if (vasenKeski == 6) {
+                liikutaL();
+                liikutaF();
+                liikutaLi();
+            }
+            else if (takaKeski == 6) {
+                liikutaB();
+                liikutaL();
+                liikutaBi();
+            }
+            else if (oikeaKeski == 6) {
+                liikutaR();
+                liikutaB();
+                liikutaRi();
+            }
+
+
+         
+        }
+
+        public void ratkaiseWhitecrossAla(){
+        
+            if (tila[3][10] == 6 && tila[0][4] != tila[1][4]) {
+                liikutaB();
+                liikutaB();
+            }
+            if (tila[4][9] == 6 && tila[4][7] != tila[4][8]) {
+                liikutaR();
+                liikutaR();
+            }
+            if (tila[5][10] == 6 && tila[7][4] != tila[8][4]) {
+                liikutaF();
+                liikutaF();
+            }
+            if (tila[4][11] == 6 && tila[4][1] != tila[4][0]) {
+                liikutaL();
+                liikutaL();
+            }
+
+
         }
     }
 }

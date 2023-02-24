@@ -143,6 +143,7 @@ public class Rubiks {
             if (syote.equals("ratkaise")) {
                 System.out.println("Ratkaistaan...");
                 kuutio.ratkaiseWhitecross();
+                kuutio.ratkaiseAlareuna();
                 System.out.println("Valmis...");
                 kuutio.tulostaKuutio();
                 ;
@@ -1058,7 +1059,7 @@ public class Rubiks {
             if (sivu < kohde) {
                 return (4 - (kohde - sivu));
             } else {
-                return (sivu-kohde);
+                return (sivu - kohde);
             }
         }
 
@@ -1139,6 +1140,15 @@ public class Rubiks {
             }
         }
 
+        public void ratkaiseAlareuna() {
+            while (!tarkastaAlareuna()) {
+                ratkaiseAlareunaYlakulma();
+                ratkaiseAlareunaSiirraYlhaalta();
+                ratkaiseAlareunaSiirraAlhaalta();
+                this.tulostaKuutio();
+            }
+        }
+
         /*
          * Ratkaisee alareunaa ylakulmissa sivulla olevien laattojen osalta
          */
@@ -1160,6 +1170,7 @@ public class Rubiks {
             int ylaOikeaYla = tila[3][5];
             int ylaOikeaAla = tila[5][5];
 
+            // TODO poista jos ei ilmaannu käyttöä
             int etuKeski = tila[6][4];
             int vasenKeski = tila[4][2];
             int takaKeski = tila[2][4];
@@ -1245,6 +1256,121 @@ public class Rubiks {
                 kulmaKaanto(muisti, 2);
             }
 
+        }
+
+        /*
+         * Siirtää alareunan selvitykseen liittyen yläsivulla olevan laatan sivulle,
+         * jonka jälkeen "ratkaiseAlareunaYlakulma" hoitaa tilanteen eteenpäin
+         */
+        public void ratkaiseAlareunaSiirraYlhaalta() {
+            int ylaVasenAla = tila[5][3];
+            int ylaVasenYla = tila[3][3];
+            int ylaOikeaYla = tila[3][5];
+            int ylaOikeaAla = tila[5][5];
+
+            if (ylaVasenAla == 6) {
+                liikutaLi();
+                liikutaU();
+                liikutaL();
+                liikutaUi();
+            } else if (ylaVasenYla == 6) {
+                liikutaL();
+                liikutaUi();
+                liikutaLi();
+                liikutaU();
+            } else if (ylaOikeaYla == 6) {
+                liikutaRi();
+                liikutaU();
+                liikutaR();
+                liikutaUi();
+            } else if (ylaOikeaYla == 6) {
+                liikutaR();
+                liikutaUi();
+                liikutaRi();
+                liikutaU();
+            }
+        }
+
+        /*
+         * Siirtää alareunan selvitykseen liittyen yläsivulla olevan laatan sivulle,
+         * jonka jälkeen "ratkaiseAlareunaYlakulma" hoitaa tilanteen eteenpäin
+         */
+        public void ratkaiseAlareunaSiirraAlasivulta() {
+            int etuVasenAla = tila[8][3];
+            int etuOikeaAla = tila[5][5];
+            int vasenVasenAla = tila[3][0];
+            int vasenOikeaAla = tila[5][0];
+            int takaVasenAla = tila[0][5];
+            int takaOikeaAla = tila[0][3];
+            int oikeaVasenAla = tila[5][8];
+            int oikeaOikeaAla = tila[3][8];
+
+            if (etuVasenAla == 6) {
+                liikutaLi();
+                liikutaU();
+                liikutaL();
+            } else if (etuOikeaAla == 6) {
+                liikutaR();
+                liikutaUi();
+                liikutaRi();
+            } else if (vasenVasenAla == 6) {
+                liikutaBi();
+                liikutaU();
+                liikutaB();
+            } else if (vasenOikeaAla == 6) {
+                liikutaF();
+                liikutaUi();
+                liikutaFi();
+            } else if (takaVasenAla == 6) {
+                liikutaRi();
+                liikutaU();
+                liikutaR();
+            } else if (takaOikeaAla == 6) {
+                liikutaL();
+                liikutaUi();
+                liikutaL();
+            } else if (oikeaVasenAla == 6) {
+                liikutaFi();
+                liikutaU();
+                liikutaF();
+            } else if (oikeaOikeaAla == 6) {
+                liikutaB();
+                liikutaBi();
+            }
+        }
+
+        /*
+         * Siirtää alareunan selvitykseen liittyen alasivulla väärässä paikassa olevan
+         * laatan sivulle,
+         * jonka jälkeen "ratkaiseAlareunaYlakulma" hoitaa tilanteen eteenpäin
+         */
+        public void ratkaiseAlareunaSiirraAlhaalta() {
+            int alaVasenAla = tila[5][11];
+            int alaVasenYla = tila[3][11];
+            int alaOikeaYla = tila[3][9];
+            int alaOikeaAla = tila[5][9];
+
+            if (alaVasenAla == 6 && tila[8][3] != tila[8][4]) {
+                liikutaLi();
+                liikutaU();
+                liikutaL();
+                liikutaUi();
+            } else if (alaVasenYla == 6 && tila[3][0] != tila[4][0]) {
+                liikutaL();
+                liikutaUi();
+                liikutaLi();
+                liikutaU();
+            } else if (alaOikeaYla == 6 && tila[0][5] != tila[0][4]) {
+                liikutaRi();
+                liikutaU();
+                liikutaR();
+                liikutaUi();
+            } else if (alaOikeaAla == 6 && tila[5][8] != tila[4][8]) {
+                liikutaR();
+                liikutaUi();
+                liikutaRi();
+                liikutaU();
+            }
         }
     }
 }

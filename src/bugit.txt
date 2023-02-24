@@ -1,0 +1,8 @@
+Rubiks.java BUGIT
+
+1# Whitecrossin ratkaisu jää looppiin monimutkaisemmissa tilanteissa
+    -Toistuu harvoin
+2# Ylakulman ratkaiseminen alareunan ratkaisussa ei onnistu joka kiertosuunta
+    -Ainakin havaittu [3][2] ja [3][6] molempien ollessa valkoisena
+    -Asioita liikkuu, mutta ei päädy oikealle paikalle
+    -Toistuu vain harvoin, ei estä toimintaa

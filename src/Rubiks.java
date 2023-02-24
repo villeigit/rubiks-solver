@@ -1050,10 +1050,18 @@ public class Rubiks {
             }
         }
 
+        /*
+         * Laskee sivun etäisyyden toiseen sivuun (vastapäivään sivusuunnassa)
+         * |kohde-sivu|
+         */
         public int sivuEtaisyys(int sivu, int kohde) {
-            return Math.abs(kohde - sivu - 1);
+            if (sivu < kohde) {
+                return (4 - (kohde - sivu));
+            } else {
+                return (sivu-kohde);
+            }
         }
-        
+
         /*
          * Kuution seuraava sivu (vastapäivään sivuttaissuunnassa)
          */
@@ -1087,47 +1095,43 @@ public class Rubiks {
                 liikutaLi();
                 liikutaU();
                 liikutaL();
-            }
-            if (sivu == 2 && puoli == 2) {
+            } else if (sivu == 2 && puoli == 2) {
                 liikutaU();
                 liikutaR();
                 liikutaUi();
                 liikutaRi();
             }
             // Punainen puoli
-            if (sivu == 3 && puoli == 1) {
+            else if (sivu == 3 && puoli == 1) {
                 liikutaUi();
                 liikutaFi();
                 liikutaU();
                 liikutaF();
-            }
-            if (sivu == 3 && puoli == 2) {
+            } else if (sivu == 3 && puoli == 2) {
                 liikutaU();
                 liikutaB();
                 liikutaUi();
                 liikutaBi();
             }
             // Vihreä puoli
-            if (sivu == 4 && puoli == 1) {
+            else if (sivu == 4 && puoli == 1) {
                 liikutaUi();
                 liikutaRi();
                 liikutaU();
                 liikutaR();
-            }
-            if (sivu == 4 && puoli == 2) {
+            } else if (sivu == 4 && puoli == 2) {
                 liikutaU();
                 liikutaL();
                 liikutaUi();
                 liikutaLi();
             }
             // Oranssi (violetti) puoli
-            if (sivu == 5 && puoli == 1) {
+            else if (sivu == 5 && puoli == 1) {
                 liikutaUi();
                 liikutaBi();
                 liikutaU();
                 liikutaB();
-            }
-            if (sivu == 5 && puoli == 2) {
+            } else if (sivu == 5 && puoli == 2) {
                 liikutaU();
                 liikutaF();
                 liikutaUi();
@@ -1135,92 +1139,110 @@ public class Rubiks {
             }
         }
 
+        /*
+         * Ratkaisee alareunaa ylakulmissa sivulla olevien laattojen osalta
+         */
         public void ratkaiseAlareunaYlakulma() {
-            int etuVasen = tila[8][3];
-            int etuOikea = tila[8][5];
-            int vasenVasen = tila[3][0];
-            int vasenOikea = tila[5][0];
-            int takaVasen = tila[0][5];
-            int takaOikea = tila[0][3];
-            int oikeaVasen = tila[5][8];
-            int oikeaOikea = tila[3][8];
+
+            // Merkitään työskentelyn helpottamiseksi
+            int etuVasen = tila[6][3];
+            int etuOikea = tila[6][5];
+            int vasenVasen = tila[3][2];
+            int vasenOikea = tila[5][2];
+
+            int takaVasen = tila[2][5];
+            int takaOikea = tila[2][3];
+            int oikeaVasen = tila[5][6];
+            int oikeaOikea = tila[3][6];
+
+            int ylaVasenAla = tila[5][3];
+            int ylaVasenYla = tila[3][3];
+            int ylaOikeaYla = tila[3][5];
+            int ylaOikeaAla = tila[5][5];
+
             int etuKeski = tila[6][4];
             int vasenKeski = tila[4][2];
             int takaKeski = tila[2][4];
             int oikeaKeski = tila[4][6];
 
+            // Jos vasen etukulma on valkoinen
             if (etuVasen == 6) {
-                int muisti = vasenOikea;
-                int kaannot = 3 - sivuEtaisyys(2, muisti);
-                for (int i = 0; i < kaannot; i++) {
+                int muisti = ylaVasenAla; // palan värillinen sivu muistiin
+                // lasketaan tarvittava käännöt tässä
+                // sivu on nyt 2 koska ETUvasen
+                int kaannot = sivuEtaisyys(2, muisti);
+                for (int i = 0; i < kaannot; i++) { // tehdään tarvittavat käännöt silmukassa
                     liikutaU();
                 }
-                kulmaKaanto(seuraavaSivu(muisti), 1);
+                // sivu jonne käännettiin on muistissa, voidaan kääntää kulmaKaannolla oikealle
+                // paikalle
+                // puoli 1 koska etuVASEN
+                kulmaKaanto(muisti, 1);
             }
 
             else if (vasenVasen == 6) {
-                int muisti = takaOikea;
-                int kaannot = 3 - sivuEtaisyys(5, muisti);
+                int muisti = ylaVasenYla;
+                int kaannot = sivuEtaisyys(5, muisti);
                 for (int i = 0; i < kaannot; i++) {
                     liikutaU();
                 }
-                kulmaKaanto(seuraavaSivu(muisti), 1);
+                kulmaKaanto(muisti, 1);
             }
 
             else if (takaVasen == 6) {
-                int muisti = oikeaOikea;
-                int kaannot = 3 - sivuEtaisyys(4, muisti);
+                int muisti = ylaOikeaYla;
+                int kaannot = sivuEtaisyys(4, muisti);
                 for (int i = 0; i < kaannot; i++) {
                     liikutaU();
                 }
-                kulmaKaanto(seuraavaSivu(muisti), 1);
+                kulmaKaanto(muisti, 1);
             }
 
             else if (oikeaVasen == 6) {
-                int muisti = etuOikea;
-                int kaannot = 3 - sivuEtaisyys(3, muisti);
+                int muisti = ylaOikeaAla;
+                int kaannot = sivuEtaisyys(3, muisti);
                 for (int i = 0; i < kaannot; i++) {
                     liikutaU();
                 }
-                kulmaKaanto(seuraavaSivu(muisti), 1);
+                kulmaKaanto(muisti, 1);
             }
 
             // Oikeat kulmat
 
             else if (etuOikea == 6) {
-                int muisti = oikeaVasen;
-                int kaannot = 3 + sivuEtaisyys(2, muisti);
+                int muisti = ylaOikeaAla;
+                int kaannot = sivuEtaisyys(2, muisti);
                 for (int i = 0; i < kaannot; i++) {
                     liikutaU();
                 }
-                kulmaKaanto(seuraavaSivu(muisti), 2);
+                kulmaKaanto(muisti, 2);
             }
 
             else if (vasenOikea == 6) {
-                int muisti = etuVasen;
-                int kaannot = 3 + sivuEtaisyys(5, muisti);
+                int muisti = ylaVasenAla;
+                int kaannot = sivuEtaisyys(5, muisti);
                 for (int i = 0; i < kaannot; i++) {
                     liikutaU();
                 }
-                kulmaKaanto(seuraavaSivu(muisti), 2);
+                kulmaKaanto(muisti, 2);
             }
 
             else if (takaOikea == 6) {
-                int muisti = vasenVasen;
-                int kaannot = 3 + sivuEtaisyys(4, muisti);
+                int muisti = ylaVasenYla;
+                int kaannot = sivuEtaisyys(4, muisti);
                 for (int i = 0; i < kaannot; i++) {
                     liikutaU();
                 }
-                kulmaKaanto(seuraavaSivu(muisti), 2);
+                kulmaKaanto(muisti, 2);
             }
 
             else if (oikeaOikea == 6) {
-                int muisti = takaVasen;
-                int kaannot = 3 + sivuEtaisyys(3, muisti);
+                int muisti = ylaOikeaYla;
+                int kaannot = sivuEtaisyys(3, muisti);
                 for (int i = 0; i < kaannot; i++) {
                     liikutaU();
                 }
-                kulmaKaanto(seuraavaSivu(muisti), 2);
+                kulmaKaanto(muisti, 2);
             }
 
         }

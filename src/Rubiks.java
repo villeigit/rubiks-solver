@@ -24,12 +24,12 @@ public class Rubiks {
 
         Scanner lukija = new Scanner(System.in);
         while (true) {
-            
+
             System.out.println("Kiertosuunnat myötäpäivään: F, B, U, D, R, L");
             System.out.println("Kiertosuunnat vastapäivään: f, b, u, d, r, l");
             System.out.println("Resetointi: UUSI");
             System.out.print("Anna kiertosuunta: ");
-           
+
             String syote = lukija.nextLine();
             if (syote.equals("D")) {
                 kuutio.liikutaD();
@@ -95,6 +95,13 @@ public class Rubiks {
                 kuutio = new Kuutio();
                 kuutio.tulostaKuutio();
                 System.out.println();
+            }
+            if (syote.equals("WC")) {
+                if(kuutio.tarkastaWhitecross()) {
+                    System.out.println("Whitecross!");
+                }
+                else System.out.println("Ei Whitecrossia");
+                
             }
         }
     }
@@ -189,25 +196,25 @@ public class Rubiks {
          * 
          * 
          */
-        //TODO: Tulostus ei toimi Windowsin konsolissa
+        // TODO: Tulostus ei toimi Windowsin konsolissa
         public void tulostaVari(int numero) {
             if (numero == 1) {
-                System.out.print(ANSI_YELLOW +" "+ numero +" "+ ANSI_RESET);
+                System.out.print(ANSI_YELLOW + " " + numero + " " + ANSI_RESET);
             }
             if (numero == 2) {
-                System.out.print(ANSI_BLUE +" "+ numero +" "+ ANSI_RESET);
+                System.out.print(ANSI_BLUE + " " + numero + " " + ANSI_RESET);
             }
             if (numero == 3) {
-                System.out.print(ANSI_RED +" "+ numero +" "+ ANSI_RESET);
+                System.out.print(ANSI_RED + " " + numero + " " + ANSI_RESET);
             }
             if (numero == 4) {
-                System.out.print(ANSI_GREEN +" "+ numero +" "+ ANSI_RESET);
+                System.out.print(ANSI_GREEN + " " + numero + " " + ANSI_RESET);
             }
             if (numero == 5) {
-                System.out.print(ANSI_PURPLE +" "+ numero +" "+ ANSI_RESET);
+                System.out.print(ANSI_PURPLE + " " + numero + " " + ANSI_RESET);
             }
             if (numero == 6) {
-                System.out.print(ANSI_WHITE +" "+ numero +" "+ ANSI_RESET);
+                System.out.print(ANSI_WHITE + " " + numero + " " + ANSI_RESET);
             }
         }
 
@@ -399,19 +406,18 @@ public class Rubiks {
             uusiTila[5][7] = this.tila[4][8];
             uusiTila[5][8] = this.tila[3][8];
             uusiTila[5][9] = this.tila[0][5];
-            
+
             // rivi 6
             uusiTila[6][5] = this.tila[5][9];
 
             // rivi 7
             uusiTila[7][5] = this.tila[4][9];
-            
+
             // rivi 8
             uusiTila[8][5] = this.tila[3][9];
 
             this.tila = uusiTila;
         }
-
 
         /**
          * Liikuttaa kuution vasenta puolta myötäpäivään yhden kierroksen
@@ -474,13 +480,13 @@ public class Rubiks {
             uusiTila[5][2] = this.tila[3][2];
             uusiTila[5][3] = this.tila[2][3];
             uusiTila[5][11] = this.tila[6][3];
-            
+
             // rivi 6
             uusiTila[6][3] = this.tila[5][3];
- 
+
             // rivi 7
             uusiTila[7][3] = this.tila[4][3];
-            
+
             // rivi 8
             uusiTila[8][3] = this.tila[3][3];
 
@@ -508,7 +514,7 @@ public class Rubiks {
          * [5] 0 1 2 3 4 5 6 7 8 9 10 11
          * [6] - - - 3 4 5
          * [7] - - - 3 - 5
-         * [8] - - - 3 4 5 
+         * [8] - - - 3 4 5
          */
 
         public void liikutaF() {
@@ -530,16 +536,16 @@ public class Rubiks {
             uusiTila[5][9] = this.tila[5][6];
             uusiTila[5][10] = this.tila[5][7];
             uusiTila[5][11] = this.tila[5][8];
-            
+
             // rivi 6
             uusiTila[6][3] = this.tila[8][3];
             uusiTila[6][4] = this.tila[7][3];
             uusiTila[6][5] = this.tila[6][3];
- 
+
             // rivi 7
             uusiTila[7][3] = this.tila[8][4];
             uusiTila[7][5] = this.tila[6][4];
-            
+
             // rivi 8
             uusiTila[8][3] = this.tila[8][5];
             uusiTila[8][4] = this.tila[7][4];
@@ -569,10 +575,10 @@ public class Rubiks {
          * [0] - - - 3 4 5
          * [1] - - - 3 - 5
          * [2] - - - 3 4 5
-         * [3] 0 1 2 3 4 5 6 7 8 9 10 11 
+         * [3] 0 1 2 3 4 5 6 7 8 9 10 11
          */
 
-         public void liikutaB() {
+        public void liikutaB() {
             int[][] uusiTila = new int[tila.length][];
             for (int i = 0; i < tila.length; i++) {
                 uusiTila[i] = tila[i].clone();
@@ -582,17 +588,16 @@ public class Rubiks {
             uusiTila[0][3] = this.tila[2][3];
             uusiTila[0][4] = this.tila[1][3];
             uusiTila[0][5] = this.tila[0][3];
-            
-            
+
             // rivi 1
             uusiTila[1][3] = this.tila[1][4];
             uusiTila[1][5] = this.tila[0][4];
- 
+
             // rivi 2
             uusiTila[2][3] = this.tila[2][5];
             uusiTila[2][4] = this.tila[1][5];
             uusiTila[2][5] = this.tila[0][5];
-            
+
             // rivi 3
             uusiTila[3][0] = this.tila[3][3];
             uusiTila[3][1] = this.tila[3][4];
@@ -612,7 +617,7 @@ public class Rubiks {
 
         /**
          * Liikuttaa kuution etupuolta VASTApäivään yhden kierroksen
-         * Toteutus kolmella myötäpäivään pyöräytyksellä 
+         * Toteutus kolmella myötäpäivään pyöräytyksellä
          */
 
         public void liikutaFi() {
@@ -627,10 +632,10 @@ public class Rubiks {
 
         /**
          * Liikuttaa kuution takapuolta VASTApäivään yhden kierroksen
-         * Toteutus kolmella myötäpäivään pyöräytyksellä 
+         * Toteutus kolmella myötäpäivään pyöräytyksellä
          */
 
-         public void liikutaBi() {
+        public void liikutaBi() {
             int[][] uusiTila = new int[tila.length][];
             for (int i = 0; i < tila.length; i++) {
                 uusiTila[i] = tila[i].clone();
@@ -642,10 +647,10 @@ public class Rubiks {
 
         /**
          * Liikuttaa kuution oikeaa puolta VASTApäivään yhden kierroksen
-         * Toteutus kolmella myötäpäivään pyöräytyksellä 
+         * Toteutus kolmella myötäpäivään pyöräytyksellä
          */
 
-         public void liikutaRi() {
+        public void liikutaRi() {
             int[][] uusiTila = new int[tila.length][];
             for (int i = 0; i < tila.length; i++) {
                 uusiTila[i] = tila[i].clone();
@@ -657,10 +662,10 @@ public class Rubiks {
 
         /**
          * Liikuttaa kuution vasenta puolta VASTApäivään yhden kierroksen
-         * Toteutus kolmella myötäpäivään pyöräytyksellä 
+         * Toteutus kolmella myötäpäivään pyöräytyksellä
          */
 
-         public void liikutaLi() {
+        public void liikutaLi() {
             int[][] uusiTila = new int[tila.length][];
             for (int i = 0; i < tila.length; i++) {
                 uusiTila[i] = tila[i].clone();
@@ -672,10 +677,10 @@ public class Rubiks {
 
         /**
          * Liikuttaa kuution yläpuolta VASTApäivään yhden kierroksen
-         * Toteutus kolmella myötäpäivään pyöräytyksellä 
+         * Toteutus kolmella myötäpäivään pyöräytyksellä
          */
 
-         public void liikutaUi() {
+        public void liikutaUi() {
             int[][] uusiTila = new int[tila.length][];
             for (int i = 0; i < tila.length; i++) {
                 uusiTila[i] = tila[i].clone();
@@ -687,10 +692,10 @@ public class Rubiks {
 
         /**
          * Liikuttaa kuution alapuolta VASTApäivään yhden kierroksen
-         * Toteutus kolmella myötäpäivään pyöräytyksellä 
+         * Toteutus kolmella myötäpäivään pyöräytyksellä
          */
 
-         public void liikutaDi() {
+        public void liikutaDi() {
             int[][] uusiTila = new int[tila.length][];
             for (int i = 0; i < tila.length; i++) {
                 uusiTila[i] = tila[i].clone();
@@ -698,6 +703,27 @@ public class Rubiks {
             liikutaD();
             liikutaD();
             liikutaD();
+        }
+
+        /**
+         * "Whitecross":in selvittäminen
+         * Whitecross = tilanne jossa kuution pohjassa on valkoinen risti ja ristin osat
+         * ovat oikeilla sivuilla
+         * Tarkastaa pohjan ja sivujen toteutumisen ja jos ei toteudu palautaa FALSE
+         * Jos toteutuu, palauttaa TRUE
+         */
+        public boolean tarkastaWhitecross() {
+
+            // pohjan tarkastus
+            if (!(tila[3][10] == 6 && tila[4][9] == 6 && tila[4][11] == 6 && tila[5][10] == 6)) {
+                return false;
+            }
+            // sivujen tarkastus
+            if (!(tila[0][4] == tila[1][4] && tila[4][0] == tila[4][1] && tila[4][10] == tila[4][11]
+                    && tila[7][4] == tila[8][4])) {
+                return false;
+            }
+            return true;
         }
     }
 }

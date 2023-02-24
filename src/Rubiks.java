@@ -102,9 +102,6 @@ public class Rubiks {
                 kuutio.tulostaKuutio();
                 System.out.println("Valmis");
             }
-            
-
-            
 
             // TODO Testi Whitecrossin tarkastukseen, poista kun valmista
             if (syote.equals("wc")) {
@@ -192,7 +189,7 @@ public class Rubiks {
          * Värit ja kuution asettelu vastaavat oikeaa rubikin kuutiota
          * Järjestys perustuu "Beginner's Method" -algoritmiin, jossa valkoinen sivu
          * pidetään aina alimpana ja keltainen ylöspäin
-         * Tämä on yleinen periaate myös muissa algoritmeissa
+         * Tämä on yleinen periaate myös muissa ratkaisuun käytettävissä algoritmeissa
          * 
          * @param koko kuution sivun pituus
          */
@@ -268,20 +265,6 @@ public class Rubiks {
         /**
          * Liikuttaa kuution alaosaa myötäpäivään yhden kierroksen
          * 
-         * Lähtöasetelma koordinaateissa:
-         * 1 1
-         * 0 1 2 3 4 5 6 7 8 9 0 1
-         * 
-         * 0 - - - 4 4 4
-         * 1 - - - 4 4 4
-         * 2 - - - 4 4 4
-         * 3 5 5 5 1 1 1 3 3 3 6 6 6
-         * 4 5 5 5 1 1 1 3 3 3 6 6 6
-         * 5 5 5 5 1 1 1 3 3 3 6 6 6
-         * 6 - - - 2 2 2
-         * 7 - - - 2 2 2
-         * 8 - - - 2 2 2
-         * 
          * Vaikutukset riveillä:
          * [0] 3 4 5
          * [3] 0 8 9 10 11
@@ -330,21 +313,7 @@ public class Rubiks {
 
         /**
          * Liikuttaa kuution yläosaa myötäpäivään yhden kierroksen
-         * 
-         * Lähtöasetelma koordinaateissa:
-         * 1 1
-         * - 0 1 2 3 4 5 6 7 8 9 0 1
-         * 
-         * 0 - - - 4 4 4
-         * 1 - - - 4 4 4
-         * 2 - - - 4 4 4
-         * 3 5 5 5 1 1 1 3 3 3 6 6 6
-         * 4 5 5 5 1 1 1 3 3 3 6 6 6
-         * 5 5 5 5 1 1 1 3 3 3 6 6 6
-         * 6 - - - 2 2 2
-         * 7 - - - 2 2 2
-         * 8 - - - 2 2 2
-         * 
+         *
          * Vaikutukset riveillä:
          * [2] 3 4 5
          * [3] 2 3 4 5 6
@@ -393,20 +362,6 @@ public class Rubiks {
 
         /**
          * Liikuttaa kuution oikeaa puolta myötäpäivään yhden kierroksen
-         * 
-         * Lähtöasetelma koordinaateissa:
-         * - - - - - - - - - - - 1 1
-         * - 0 1 2 3 4 5 6 7 8 9 0 1
-         * 
-         * 0 - - - 4 4 4
-         * 1 - - - 4 4 4
-         * 2 - - - 4 4 4
-         * 3 5 5 5 1 1 1 3 3 3 6 6 6
-         * 4 5 5 5 1 1 1 3 3 3 6 6 6
-         * 5 5 5 5 1 1 1 3 3 3 6 6 6
-         * 6 - - - 2 2 2
-         * 7 - - - 2 2 2
-         * 8 - - - 2 2 2
          * 
          * Vaikutukset riveillä:
          * [0] 5
@@ -469,20 +424,6 @@ public class Rubiks {
         /**
          * Liikuttaa kuution vasenta puolta myötäpäivään yhden kierroksen
          * 
-         * Lähtöasetelma koordinaateissa:
-         * - - - - - - - - - - - 1 1
-         * - 0 1 2 3 4 5 6 7 8 9 0 1
-         * 
-         * 0 - - - 4 4 4
-         * 1 - - - 4 4 4
-         * 2 - - - 4 4 4
-         * 3 5 5 5 1 1 1 3 3 3 6 6 6
-         * 4 5 5 5 1 1 1 3 3 3 6 6 6
-         * 5 5 5 5 1 1 1 3 3 3 6 6 6
-         * 6 - - - 2 2 2
-         * 7 - - - 2 2 2
-         * 8 - - - 2 2 2
-         * 
          * Vaikutukset riveillä:
          * [0] 3
          * [1] 3
@@ -543,20 +484,6 @@ public class Rubiks {
         /**
          * Liikuttaa kuution etupuolta myötäpäivään yhden kierroksen
          * 
-         * Lähtöasetelma koordinaateissa:
-         * - - - - - - - - - - - 1 1
-         * - 0 1 2 3 4 5 6 7 8 9 0 1
-         * 
-         * 0 - - - 4 4 4
-         * 1 - - - 4 4 4
-         * 2 - - - 4 4 4
-         * 3 5 5 5 1 1 1 3 3 3 6 6 6
-         * 4 5 5 5 1 1 1 3 3 3 6 6 6
-         * 5 5 5 5 1 1 1 3 3 3 6 6 6
-         * 6 - - - 2 2 2
-         * 7 - - - 2 2 2
-         * 8 - - - 2 2 2
-         * 
          * Vaikutukset riveillä:
          * [5] 0 1 2 3 4 5 6 7 8 9 10 11
          * [6] - - - 3 4 5
@@ -603,20 +530,6 @@ public class Rubiks {
 
         /**
          * Liikuttaa kuution etupuolta myötäpäivään yhden kierroksen
-         * 
-         * Lähtöasetelma koordinaateissa:
-         * - - - - - - - - - - - 1 1
-         * - 0 1 2 3 4 5 6 7 8 9 0 1
-         * 
-         * 0 - - - 4 4 4
-         * 1 - - - 4 4 4
-         * 2 - - - 4 4 4
-         * 3 5 5 5 1 1 1 3 3 3 6 6 6
-         * 4 5 5 5 1 1 1 3 3 3 6 6 6
-         * 5 5 5 5 1 1 1 3 3 3 6 6 6
-         * 6 - - - 2 2 2
-         * 7 - - - 2 2 2
-         * 8 - - - 2 2 2
          * 
          * Vaikutukset riveillä:
          * [0] - - - 3 4 5
@@ -753,7 +666,7 @@ public class Rubiks {
         }
 
         /**
-         * "Whitecross":in selvittäminen
+         * "Whitecross":in tarkastaminen
          * Whitecross = tilanne jossa kuution pohjassa on valkoinen risti ja ristin osat
          * ovat oikeilla sivuilla (sivut oikein kun sivun keskimmäinen pala ja
          * keskimmäinen alin pala ovat samat)
@@ -777,7 +690,7 @@ public class Rubiks {
         /**
          * Alareunan tilanteen tarkastus
          * Whitecrossia seuraavaa vaihe, jossa kuution pohja (valkoinen) ja kaikki
-         * alimmat rivit sivuilta ovat kunnossa
+         * alimmat rivit sivuilta ovat oikein
          */
         public boolean tarkastaAlareuna() {
 
@@ -807,7 +720,7 @@ public class Rubiks {
         /**
          * Keskireunan tilanteen tarkastus
          * Alareunaa seuraavaa vaihe, jossa kuution pohja (valkoinen) ja kaksi alinta
-         * riviä sivuilta ovat kunnossa
+         * riviä sivuilta ovat oikein
          */
         public boolean tarkastaKeskireuna() {
 
@@ -861,8 +774,8 @@ public class Rubiks {
         }
 
         /**
-         * Tarkastaa onko kuutio valmis
-         * Jos ei toteudu palautaa FALSE
+         * Tarkastaa onko kuutio valmis/oikein
+         * Jos ei toteudu palauttaa FALSE
          * Jos toteutuu, palauttaa TRUE
          */
         public boolean tarkastaKuutio() {
@@ -889,16 +802,31 @@ public class Rubiks {
             return true;
         }
 
+        /*
+         * Whitecrossin ratkaisu
+         * Silmukkaa toistaa osaratkaisuja siihen asti, että Whitecrossin tarkastus
+         * menee läpi
+         */
         public void ratkaiseWhitecross() {
             while (!(tarkastaWhitecross())) {
                 ratkaiseWhitecrossYla();
-                this.tulostaKuutio();
                 ratkaiseWhitecrossSivu();
                 ratkaiseWhitecrossAla();
+                this.tulostaKuutio();
             }
         }
 
+        /*
+         * Whitecross yläosan ratkaisu
+         * Tämä vaihe siirtää kuution yläpuolella olevan valkoisen keskilaatan oikeaan
+         * paikkaan kuution alapuolelle
+         */
         public void ratkaiseWhitecrossYla() {
+
+            // Tallennetaan tilat tekstimuotoon käsittelyn helpottamiseksi
+            // Selite:
+            // yla = ylhäällä oleva keskilaatta (ylhäältä katsottuna)
+            // ylaSivu = edellistä laatan toinen sivu ylimmällä rivillä sivusta katsottuna
 
             int yla = tila[3][4];
             int oikea = tila[4][5];
@@ -909,14 +837,17 @@ public class Rubiks {
             int alaSivu = tila[6][4];
             int vasenSivu = tila[4][2];
 
+            // Sijainnissa "yla" on valkoinen laatta
             if (yla == 6) {
-                if (ylaSivu == 5) {
+                if (ylaSivu == 5) { // jos laatan toinen sivu oranssi/violetti käännetään yläosaa kolmesti, jotta
+                                    // voidaan kääntää laatta oikealle paikalleen
                     liikutaU();
                     liikutaU();
                     liikutaU();
-                    kaannaWhitecrossYla(ylaSivu);
+                    kaannaWhitecrossYla(ylaSivu); // kääntöjen jälkeen laatta oikealle paikalleen
                 }
 
+                // vastaavat toimenpiteet vihreälle laatalle
                 else if (ylaSivu == 4) {
                     kaannaWhitecrossYla(ylaSivu);
                 } else if (ylaSivu == 3) {
@@ -929,7 +860,7 @@ public class Rubiks {
                 }
 
             }
-
+            // Samat toimenpiteet, nyt valkoinen laatta on oikealla
             else if (oikea == 6) {
                 if (oikeaSivu == 5) {
                     liikutaU();
@@ -947,7 +878,7 @@ public class Rubiks {
                     kaannaWhitecrossYla(oikeaSivu);
                 }
             }
-
+            // Valkoinen laatta alhaalla
             else if (ala == 6) {
                 if (alaSivu == 5) {
                     liikutaU();
@@ -965,7 +896,7 @@ public class Rubiks {
                     kaannaWhitecrossYla(alaSivu);
                 }
             }
-
+            // Valkoinen laatta vasemmalla
             else if (vasen == 6) {
                 if (vasenSivu == 5) {
                     kaannaWhitecrossYla(vasenSivu);
@@ -986,15 +917,20 @@ public class Rubiks {
 
         }
 
+        /*
+         * Käännetään ylhäällä oleva valkoinen laatta vastakkaiselle puolelle
+         */
+
         public void kaannaWhitecrossYla(int vari) {
 
             if (vari == 2) {
                 liikutaF();
                 liikutaF();
             }
-            if (vari == 3)
+            if (vari == 3) {
                 liikutaR();
-            liikutaR();
+                liikutaR();
+            }
 
             if (vari == 4) {
                 liikutaB();
@@ -1008,7 +944,16 @@ public class Rubiks {
 
         }
 
+        /*
+         * Ratkaistaan Whitecross tilanteessa, jossa valkoinen laatta on jollakin
+         * kuution sivuista, keskimmäisellä rivillä reunassa.
+         * HUOM. Tämä siirtää vain sivulla olevan laatan ylös, josta
+         * "ratkaiseWhitecrossYla" hoitaa ratkaisun loppuun
+         * 
+         */
         public void ratkaiseWhitecrossSivu() {
+
+            // Merkitään tilat lukemisen helpottamiseksi
             int etuVasen = tila[7][3];
             int etuOikea = tila[7][5];
             int vasenVasen = tila[3][1];
@@ -1023,19 +968,17 @@ public class Rubiks {
             int takaKeski = tila[2][4];
             int oikeaKeski = tila[4][6];
 
+            // Etusivulla on valkoinen laatta vasemmassa reunassa, siirretään liikesarjalla
+            // kuution yläsivulle
             if (etuVasen == 6) {
                 liikutaLi();
                 liikutaU();
                 liikutaL();
-            }
-
-            else if (etuOikea == 6) {
+            } else if (etuOikea == 6) {
                 liikutaR();
                 liikutaU();
                 liikutaRi();
-            }
-
-            else if (vasenVasen == 6) {
+            } else if (vasenVasen == 6) {
                 liikutaBi();
                 liikutaU();
                 liikutaB();
@@ -1076,12 +1019,20 @@ public class Rubiks {
                 liikutaB();
                 liikutaRi();
             }
-
         }
 
+        /*
+         * Ratkaistaan Whitecross tilanteessa, jossa laatta on alapuolella, mutta
+         * väärällä paikalla (sivun väri on väärä)
+         * HUOM. Myös tässä jätetään varsinainen oikealle paikalle siirto metodille
+         * "ratkaiseWhitecrossYla"
+         */
         public void ratkaiseWhitecrossAla() {
 
+            // Tarkastetaan onko kuution alasivulla paikassa [3][10] valkoinen laatta, jonka
+            // toinen sivu on väärän värinen
             if (tila[3][10] == 6 && tila[0][4] != tila[1][4]) {
+                // jos väärä väri sivulla. käännetään yläpuolelle
                 liikutaB();
                 liikutaB();
             }
@@ -1099,25 +1050,35 @@ public class Rubiks {
             }
         }
 
-        public void ratkaiseAlareuna() {
-            //while (!tarkastaAlareuna())
-                //ratkaiseAlakulma();
-        }
-
         public int sivuEtaisyys(int sivu, int kohde) {
             return Math.abs(kohde - sivu - 1);
         }
-
+        
+        /*
+         * Kuution seuraava sivu (vastapäivään sivuttaissuunnassa)
+         */
         public int seuraavaSivu(int nykyinen) {
-            if(nykyinen == 5) return 2;
-            else return nykyinen + 1;
+            if (nykyinen == 5)
+                return 2;
+            else
+                return nykyinen + 1;
         }
 
+        /*
+         * Kuution edellinen sivu (myötäpäivään sivuttaissuunnassa)
+         */
         public int edellinenSivu(int nykyinen) {
-            if(nykyinen == 2) return 5;
-            else return nykyinen - 1;
+            if (nykyinen == 2)
+                return 5;
+            else
+                return nykyinen - 1;
         }
 
+        /*
+         * Kääntää kulmaa siten että valkoinen kulmalaatta saadaan oikealle paikalle
+         * Huomioi parametrina saadun sivun ja puolen(vasen tai oikea), jonka
+         * perusteella liikkeet tehdään oikeille sivuille
+         */
         public void kulmaKaanto(int sivu, int puoli) {
 
             // Sininen puoli
@@ -1155,9 +1116,9 @@ public class Rubiks {
             }
             if (sivu == 4 && puoli == 2) {
                 liikutaU();
-                liikutaR();
+                liikutaL();
                 liikutaUi();
-                liikutaRi();
+                liikutaLi();
             }
             // Oranssi (violetti) puoli
             if (sivu == 5 && puoli == 1) {
@@ -1168,9 +1129,9 @@ public class Rubiks {
             }
             if (sivu == 5 && puoli == 2) {
                 liikutaU();
-                liikutaB();
+                liikutaF();
                 liikutaUi();
-                liikutaBi();
+                liikutaFi();
             }
         }
 
@@ -1224,7 +1185,7 @@ public class Rubiks {
                 kulmaKaanto(seuraavaSivu(muisti), 1);
             }
 
-            //Oikeat kulmat
+            // Oikeat kulmat
 
             else if (etuOikea == 6) {
                 int muisti = oikeaVasen;

@@ -2,7 +2,6 @@ package src;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Virtuaalinen rubikin kuutio ja ratkaisija
@@ -97,6 +96,15 @@ public class Rubiks {
                 kuutio.tulostaKuutio();
                 System.out.println();
             }
+            if (syote.equals("kulma")) {
+                kuutio.ratkaiseAlareunaYlakulma();
+                System.out.println("Ratkaistaan...");
+                kuutio.tulostaKuutio();
+                System.out.println("Valmis");
+            }
+            
+
+            
 
             // TODO Testi Whitecrossin tarkastukseen, poista kun valmista
             if (syote.equals("wc")) {
@@ -911,12 +919,10 @@ public class Rubiks {
 
                 else if (ylaSivu == 4) {
                     kaannaWhitecrossYla(ylaSivu);
-                }
-                else if (ylaSivu == 3) {
+                } else if (ylaSivu == 3) {
                     liikutaU();
                     kaannaWhitecrossYla(ylaSivu);
-                }
-                else if (ylaSivu == 2) {
+                } else if (ylaSivu == 2) {
                     liikutaU();
                     liikutaU();
                     kaannaWhitecrossYla(ylaSivu);
@@ -929,17 +935,14 @@ public class Rubiks {
                     liikutaU();
                     liikutaU();
                     kaannaWhitecrossYla(oikeaSivu);
-                }
-                else if (oikeaSivu == 4) {
+                } else if (oikeaSivu == 4) {
                     liikutaU();
                     liikutaU();
                     liikutaU();
                     kaannaWhitecrossYla(oikeaSivu);
-                }
-                else if (oikeaSivu == 3) {
+                } else if (oikeaSivu == 3) {
                     kaannaWhitecrossYla(oikeaSivu);
-                }
-                else if (oikeaSivu == 2) {
+                } else if (oikeaSivu == 2) {
                     liikutaU();
                     kaannaWhitecrossYla(oikeaSivu);
                 }
@@ -951,17 +954,14 @@ public class Rubiks {
                     liikutaU();
                     liikutaU();
                     kaannaWhitecrossYla(alaSivu);
-                }
-                else if (alaSivu == 4) {
+                } else if (alaSivu == 4) {
                     liikutaU();
                     liikutaU();
                     kaannaWhitecrossYla(alaSivu);
-                }
-                else if (alaSivu == 3) {
+                } else if (alaSivu == 3) {
                     liikutaU();
                     kaannaWhitecrossYla(alaSivu);
-                }
-                else if (alaSivu == 2) {
+                } else if (alaSivu == 2) {
                     kaannaWhitecrossYla(alaSivu);
                 }
             }
@@ -969,19 +969,16 @@ public class Rubiks {
             else if (vasen == 6) {
                 if (vasenSivu == 5) {
                     kaannaWhitecrossYla(vasenSivu);
-                }
-                else if (vasenSivu == 4) {
+                } else if (vasenSivu == 4) {
                     liikutaU();
                     liikutaU();
                     liikutaU();
                     kaannaWhitecrossYla(vasenSivu);
-                }
-                else if (vasenSivu == 3) {
+                } else if (vasenSivu == 3) {
                     liikutaU();
                     liikutaU();
                     kaannaWhitecrossYla(vasenSivu);
-                }
-                else if (vasenSivu == 2) {
+                } else if (vasenSivu == 2) {
                     liikutaU();
                     kaannaWhitecrossYla(vasenSivu);
                 }
@@ -997,7 +994,7 @@ public class Rubiks {
             }
             if (vari == 3)
                 liikutaR();
-                liikutaR();
+            liikutaR();
 
             if (vari == 4) {
                 liikutaB();
@@ -1013,7 +1010,7 @@ public class Rubiks {
 
         public void ratkaiseWhitecrossSivu() {
             int etuVasen = tila[7][3];
-            int etuOikea = tila[7][5];  
+            int etuOikea = tila[7][5];
             int vasenVasen = tila[3][1];
             int vasenOikea = tila[5][1];
             int takaVasen = tila[1][5];
@@ -1062,34 +1059,28 @@ public class Rubiks {
                 liikutaB();
                 liikutaU();
                 liikutaBi();
-            }
-            else if (etuKeski == 6) {
+            } else if (etuKeski == 6) {
                 liikutaF();
                 liikutaR();
                 liikutaFi();
-            }
-            else if (vasenKeski == 6) {
+            } else if (vasenKeski == 6) {
                 liikutaL();
                 liikutaF();
                 liikutaLi();
-            }
-            else if (takaKeski == 6) {
+            } else if (takaKeski == 6) {
                 liikutaB();
                 liikutaL();
                 liikutaBi();
-            }
-            else if (oikeaKeski == 6) {
+            } else if (oikeaKeski == 6) {
                 liikutaR();
                 liikutaB();
                 liikutaRi();
             }
 
-
-         
         }
 
-        public void ratkaiseWhitecrossAla(){
-        
+        public void ratkaiseWhitecrossAla() {
+
             if (tila[3][10] == 6 && tila[0][4] != tila[1][4]) {
                 liikutaB();
                 liikutaB();
@@ -1106,7 +1097,170 @@ public class Rubiks {
                 liikutaL();
                 liikutaL();
             }
+        }
 
+        public void ratkaiseAlareuna() {
+            //while (!tarkastaAlareuna())
+                //ratkaiseAlakulma();
+        }
+
+        public int sivuEtaisyys(int sivu, int kohde) {
+            return Math.abs(kohde - sivu - 1);
+        }
+
+        public int seuraavaSivu(int nykyinen) {
+            if(nykyinen == 5) return 2;
+            else return nykyinen + 1;
+        }
+
+        public int edellinenSivu(int nykyinen) {
+            if(nykyinen == 2) return 5;
+            else return nykyinen - 1;
+        }
+
+        public void kulmaKaanto(int sivu, int puoli) {
+
+            // Sininen puoli
+            if (sivu == 2 && puoli == 1) {
+                liikutaUi();
+                liikutaLi();
+                liikutaU();
+                liikutaL();
+            }
+            if (sivu == 2 && puoli == 2) {
+                liikutaU();
+                liikutaR();
+                liikutaUi();
+                liikutaRi();
+            }
+            // Punainen puoli
+            if (sivu == 3 && puoli == 1) {
+                liikutaUi();
+                liikutaFi();
+                liikutaU();
+                liikutaF();
+            }
+            if (sivu == 3 && puoli == 2) {
+                liikutaU();
+                liikutaB();
+                liikutaUi();
+                liikutaBi();
+            }
+            // Vihreä puoli
+            if (sivu == 4 && puoli == 1) {
+                liikutaUi();
+                liikutaRi();
+                liikutaU();
+                liikutaR();
+            }
+            if (sivu == 4 && puoli == 2) {
+                liikutaU();
+                liikutaR();
+                liikutaUi();
+                liikutaRi();
+            }
+            // Oranssi (violetti) puoli
+            if (sivu == 5 && puoli == 1) {
+                liikutaUi();
+                liikutaBi();
+                liikutaU();
+                liikutaB();
+            }
+            if (sivu == 5 && puoli == 2) {
+                liikutaU();
+                liikutaB();
+                liikutaUi();
+                liikutaBi();
+            }
+        }
+
+        public void ratkaiseAlareunaYlakulma() {
+            int etuVasen = tila[8][3];
+            int etuOikea = tila[8][5];
+            int vasenVasen = tila[3][0];
+            int vasenOikea = tila[5][0];
+            int takaVasen = tila[0][5];
+            int takaOikea = tila[0][3];
+            int oikeaVasen = tila[5][8];
+            int oikeaOikea = tila[3][8];
+            int etuKeski = tila[6][4];
+            int vasenKeski = tila[4][2];
+            int takaKeski = tila[2][4];
+            int oikeaKeski = tila[4][6];
+
+            if (etuVasen == 6) {
+                int muisti = vasenOikea;
+                int kaannot = 3 - sivuEtaisyys(2, muisti);
+                for (int i = 0; i < kaannot; i++) {
+                    liikutaU();
+                }
+                kulmaKaanto(seuraavaSivu(muisti), 1);
+            }
+
+            else if (vasenVasen == 6) {
+                int muisti = takaOikea;
+                int kaannot = 3 - sivuEtaisyys(5, muisti);
+                for (int i = 0; i < kaannot; i++) {
+                    liikutaU();
+                }
+                kulmaKaanto(seuraavaSivu(muisti), 1);
+            }
+
+            else if (takaVasen == 6) {
+                int muisti = oikeaOikea;
+                int kaannot = 3 - sivuEtaisyys(4, muisti);
+                for (int i = 0; i < kaannot; i++) {
+                    liikutaU();
+                }
+                kulmaKaanto(seuraavaSivu(muisti), 1);
+            }
+
+            else if (oikeaVasen == 6) {
+                int muisti = etuOikea;
+                int kaannot = 3 - sivuEtaisyys(3, muisti);
+                for (int i = 0; i < kaannot; i++) {
+                    liikutaU();
+                }
+                kulmaKaanto(seuraavaSivu(muisti), 1);
+            }
+
+            //Oikeat kulmat
+
+            else if (etuOikea == 6) {
+                int muisti = oikeaVasen;
+                int kaannot = 3 + sivuEtaisyys(2, muisti);
+                for (int i = 0; i < kaannot; i++) {
+                    liikutaU();
+                }
+                kulmaKaanto(seuraavaSivu(muisti), 2);
+            }
+
+            else if (vasenOikea == 6) {
+                int muisti = etuVasen;
+                int kaannot = 3 + sivuEtaisyys(5, muisti);
+                for (int i = 0; i < kaannot; i++) {
+                    liikutaU();
+                }
+                kulmaKaanto(seuraavaSivu(muisti), 2);
+            }
+
+            else if (takaOikea == 6) {
+                int muisti = vasenVasen;
+                int kaannot = 3 + sivuEtaisyys(4, muisti);
+                for (int i = 0; i < kaannot; i++) {
+                    liikutaU();
+                }
+                kulmaKaanto(seuraavaSivu(muisti), 2);
+            }
+
+            else if (oikeaOikea == 6) {
+                int muisti = takaVasen;
+                int kaannot = 3 + sivuEtaisyys(3, muisti);
+                for (int i = 0; i < kaannot; i++) {
+                    liikutaU();
+                }
+                kulmaKaanto(seuraavaSivu(muisti), 2);
+            }
 
         }
     }

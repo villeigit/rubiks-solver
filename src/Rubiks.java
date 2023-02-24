@@ -96,12 +96,41 @@ public class Rubiks {
                 kuutio.tulostaKuutio();
                 System.out.println();
             }
-            if (syote.equals("WC")) {
+
+            //TODO Testi Whitecrossin tarkastukseen, poista kun valmista
+            if (syote.equals("wc")) {
                 if(kuutio.tarkastaWhitecross()) {
                     System.out.println("Whitecross!");
                 }
-                else System.out.println("Ei Whitecrossia");
-                
+                else System.out.println("Ei Whitecrossia");  
+            }
+            //TODO Testi Alareunan tarkastukseen, poista kun valmista
+            if (syote.equals("ala")) {
+                if(kuutio.tarkastaAlareuna()) {
+                    System.out.println("Alareuna!");
+                }
+                else System.out.println("Ei alareunaa");
+            }
+            //TODO Testi Keskireunan tarkastukseen, poista kun valmista
+            if (syote.equals("keski")) {
+                if(kuutio.tarkastaKeskireuna()) {
+                    System.out.println("Keskireuna!");
+                }
+                else System.out.println("Ei keskireunaa");
+            }
+            //TODO Testi Yellowcrossin tarkastukseen, poista kun valmista
+            if (syote.equals("keski")) {
+                if(kuutio.tarkastaYellowcross()) {
+                    System.out.println("Yellowcross!");
+                }
+                else System.out.println("Ei Yellowcrossia");
+            }
+            //TODO Testi Yellowcrossin tarkastukseen, poista kun valmista
+            if (syote.equals("kuutio")) {
+                if(kuutio.tarkastaKuutio()) {
+                    System.out.println("Oikein!");
+                }
+                else System.out.println("Väärin");
             }
         }
     }
@@ -708,7 +737,7 @@ public class Rubiks {
         /**
          * "Whitecross":in selvittäminen
          * Whitecross = tilanne jossa kuution pohjassa on valkoinen risti ja ristin osat
-         * ovat oikeilla sivuilla
+         * ovat oikeilla sivuilla (sivut oikein kun sivun keskimmäinen pala ja keskimmäinen alin pala ovat samat)
          * Tarkastaa pohjan ja sivujen toteutumisen ja jos ei toteudu palautaa FALSE
          * Jos toteutuu, palauttaa TRUE
          */
@@ -719,8 +748,120 @@ public class Rubiks {
                 return false;
             }
             // sivujen tarkastus
-            if (!(tila[0][4] == tila[1][4] && tila[4][0] == tila[4][1] && tila[4][10] == tila[4][11]
+            if (!(tila[0][4] == tila[1][4] && tila[4][0] == tila[4][1] && tila[4][7] == tila[4][8]
                     && tila[7][4] == tila[8][4])) {
+                return false;
+            }
+            return true;
+        }
+
+        /**
+         * Alareunan tilanteen tarkastus
+         * Whitecrossia seuraavaa vaihe, jossa kuution pohja (valkoinen) ja kaikki alimmat rivit sivuilta ovat kunnossa
+         */
+        public boolean tarkastaAlareuna() {
+
+            //Whitecrossin tarkastus riittää pohjan tarkastamiseksi
+            if(!tarkastaWhitecross()) {
+                return false;
+            }
+            // 1 sivun tarkastus
+            if (!(tila[0][3] == tila[0][4] && tila[0][4] == tila[0][5])) {
+                return false;
+            }
+            // 2 sivun tarkastus
+            if (!(tila[3][0] == tila[4][0] && tila[4][0] == tila[5][0])) {
+                return false;
+            }
+            // 3 sivun tarkastus
+            if (!(tila[3][11] == tila[4][11] && tila[4][11] == tila[5][11])) {
+                return false;
+            }
+            // 4 sivun tarkastus
+            if (!(tila[8][3] == tila[8][4] && tila[8][4] == tila[8][5])) {
+                return false;
+            }
+            return true;
+        }
+
+        /**
+         * Keskireunan tilanteen tarkastus
+         * Alareunaa seuraavaa vaihe, jossa kuution pohja (valkoinen) ja kaksi alinta riviä sivuilta ovat kunnossa
+         */
+        public boolean tarkastaKeskireuna() {
+
+            //Tarkastetaan alareuna
+            if(!tarkastaAlareuna()) {
+                return false;
+            }
+            // 1 sivun tarkastus
+            if (!(tila[1][3] == tila[1][4] && tila[1][4] == tila[1][5])) {
+                return false;
+            }
+            // 2 sivun tarkastus
+            if (!(tila[3][1] == tila[4][1] && tila[4][1] == tila[5][1])) {
+                return false;
+            }
+            // 3 sivun tarkastus
+            if (!(tila[3][7] == tila[4][7] && tila[4][7] == tila[5][7])) {
+                return false;
+            }
+            // 4 sivun tarkastus
+            if (!(tila[7][3] == tila[7][4] && tila[7][4] == tila[7][5])) {
+                return false;
+            }
+            return true;
+        }
+
+        /**
+         * "Yellowcrossin":in selvittäminen
+         * Yellowcross = tilanne jossa kuution päällä on keltainen risti ja ristin osat
+         * ovat oikeilla sivuilla (sivut oikein kun ylärivin keskimmäinen pala ja kaksi alintariviä ovat samaa väriä
+         * Tarkastaa keskirivin toteutumisen ja jos ei toteudu palautaa FALSE
+         * Jos toteutuu, palauttaa TRUE
+         */
+        public boolean tarkastaYellowcross() {
+
+            if(!tarkastaKeskireuna()) {
+                return false;
+            }
+
+            // päällisen tarkastus
+            if (!(tila[3][4] == 1 && tila[4][3] == 1 && tila[4][5] == 1 && tila[5][4] == 1)) {
+                return false;
+            }
+            // sivujen tarkastus
+            if (!(tila[2][4] == tila[1][4] && tila[4][2] == tila[4][1] && tila[4][6] == tila[4][7]
+                    && tila[6][4] == tila[7][4])) {
+                return false;
+            }
+            return true;
+        }
+
+        /**
+         * Tarkastaa onko kuutio valmis
+         * Jos ei toteudu palautaa FALSE
+         * Jos toteutuu, palauttaa TRUE
+         */
+        public boolean tarkastaKuutio() {
+            if(!tarkastaYellowcross()) {
+                return false;
+            }
+
+            // 1 sivun tarkastus
+            if (!(tila[2][3] == tila[2][4] && tila[2][4] == tila[2][5])) {
+                return false;
+            }
+            // 2 sivun tarkastus
+            if (!(tila[3][2]== tila[4][2] && tila[4][2] == tila[5][2])) {
+                return false;
+            }
+            // 3 sivun tarkastus
+            if (!(tila[3][6] == tila[4][6] && tila[4][6] == tila[5][6])) {
+                return false;
+            }
+            // 4 sivun tarkastus
+            if (!(tila[6][3] == tila[6][4] && tila[6][4] == tila[6][5])) {
                 return false;
             }
             return true;

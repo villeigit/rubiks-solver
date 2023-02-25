@@ -31,6 +31,71 @@ public class Rubiks {
             System.out.print("Anna kiertosuunta: ");
 
             String syote = lukija.nextLine();
+
+            if(syote.charAt(0) == ('-')) {
+                if (syote.contains("D")) {
+                    kuutio.liikutaD();
+                    kuutio.tulostaKuutio();
+                    System.out.println();
+                }
+                if (syote.contains("d")) {
+                    kuutio.liikutaDi();
+                    kuutio.tulostaKuutio();
+                    System.out.println();
+                }
+                if (syote.contains("U")) {
+                    kuutio.liikutaU();
+                    kuutio.tulostaKuutio();
+                    System.out.println();
+                }
+                if (syote.contains("u")) {
+                    kuutio.liikutaUi();
+                    kuutio.tulostaKuutio();
+                    System.out.println();
+                }
+                if (syote.contains("R")) {
+                    kuutio.liikutaR();
+                    kuutio.tulostaKuutio();
+                    System.out.println();
+                }
+                if (syote.contains("r")) {
+                    kuutio.liikutaRi();
+                    kuutio.tulostaKuutio();
+                    System.out.println();
+                }
+                if (syote.contains("L")) {
+                    kuutio.liikutaL();
+                    kuutio.tulostaKuutio();
+                    System.out.println();
+                }
+                if (syote.contains("l")) {
+                    kuutio.liikutaLi();
+                    kuutio.tulostaKuutio();
+                    System.out.println();
+                }
+                if (syote.contains("F")) {
+                    kuutio.liikutaF();
+                    kuutio.tulostaKuutio();
+                    System.out.println();
+                }
+                if (syote.contains("f")) {
+                    kuutio.liikutaFi();
+                    kuutio.tulostaKuutio();
+                    System.out.println();
+                }
+                if (syote.contains("B")) {
+                    kuutio.liikutaB();
+                    kuutio.tulostaKuutio();
+                    System.out.println();
+                }
+                if (syote.contains("b")) {
+                    kuutio.liikutaB();
+                    kuutio.tulostaKuutio();
+                    System.out.println();
+                }
+
+            }
+
             if (syote.equals("D")) {
                 kuutio.liikutaD();
                 kuutio.tulostaKuutio();
@@ -813,6 +878,7 @@ public class Rubiks {
                 ratkaiseWhitecrossYla();
                 ratkaiseWhitecrossSivu();
                 ratkaiseWhitecrossAla();
+                System.out.println("Ratkaistaan Whitecrossia");
                 this.tulostaKuutio();
             }
         }
@@ -1144,7 +1210,9 @@ public class Rubiks {
             while (!tarkastaAlareuna()) {
                 ratkaiseAlareunaYlakulma();
                 ratkaiseAlareunaSiirraYlhaalta();
+                ratkaiseAlareunaSiirraAlasivulta();
                 ratkaiseAlareunaSiirraAlhaalta();
+                System.out.println("Ratkaistaan alareunaa:");
                 this.tulostaKuutio();
             }
         }

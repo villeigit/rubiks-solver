@@ -12,3 +12,4 @@ Rubiks.java BUGIT
     !Koodissa muutoksia, seurattava vaikuttiko 
 3# Alareuna jumittuu kun valkoinen [3][8], [5][8], [8][5]
 4# Alareunan ratkaisu rikkoo Whitecrossin (valkoinen ruudussa [5][1])
+5# Keskireunan ratkaisu jää looppiin

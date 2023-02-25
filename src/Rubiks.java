@@ -1,5 +1,6 @@
 package src;
 
+import java.rmi.server.UID;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -209,6 +210,7 @@ public class Rubiks {
                 System.out.println("Ratkaistaan...");
                 kuutio.ratkaiseWhitecross();
                 kuutio.ratkaiseAlareuna();
+                kuutio.ratkaiseKeskiReuna();
                 System.out.println("Valmis...");
                 kuutio.tulostaKuutio();
                 ;
@@ -996,19 +998,19 @@ public class Rubiks {
             int takaAla = tila[0][4];
             int oikeaAla = tila[4][8];
 
-            if(etuAla == 6) {
+            if (etuAla == 6) {
                 liikutaF();
                 liikutaF();
             }
-            if(vasenAla == 6) {
+            if (vasenAla == 6) {
                 liikutaL();
                 liikutaL();
             }
-            if(takaAla == 6) {
+            if (takaAla == 6) {
                 liikutaB();
                 liikutaB();
             }
-            if(oikeaAla == 6) {
+            if (oikeaAla == 6) {
                 liikutaR();
                 liikutaR();
             }
@@ -1469,6 +1471,203 @@ public class Rubiks {
                 liikutaUi();
                 liikutaRi();
                 liikutaU();
+            }
+        }
+
+        public void ratkaiseKeskiReuna(){
+            while (!tarkastaKeskireuna()) {
+                for (int i=0; i < 8; i++) {
+                    ratkaiseKeskiReunaToteutus();
+                    liikutaU();
+                    System.out.println("Ratkaistaan Keskireunaa...");
+                    tulostaKuutio();
+                }
+                ratkaiseKeskiReunaJumi();
+                System.out.println("Ratkaistaan Keskireunaa...");
+                tulostaKuutio();
+            }
+        }
+
+        public void ratkaiseKeskiReunaToteutus() {
+
+            int etuYla = tila[6][4];
+            int etuKeski = tila[7][4];
+            int etuPaa = tila[5][4];
+            int vasenYla = tila[4][2];
+            int vasenKeski = tila[4][1];
+            int vasenPaa = tila[4][3];
+            int takaYla = tila[2][4];
+            int takaKeski = tila[1][4];
+            int takaPaa = tila[3][4];
+            int oikeaYla = tila[4][6];
+            int oikeaKeski = tila[4][7];
+            int oikeaPaa = tila[4][5];
+
+            if (etuYla == etuKeski) {
+                int puoli = 1;
+                if (etuKeski > etuPaa) { // puolten numeroinneista johtuen isompi on aina oikealla
+                    puoli = 2;
+                }
+                keskiKaanto(etuKeski, puoli);
+            }
+
+            else if (vasenYla == vasenKeski) {
+                int puoli = 1;
+                if (vasenKeski > vasenPaa || (vasenKeski == 5 && vasenPaa == 2)) { // Huom 5 ja 2
+                    puoli = 2;
+                }
+                keskiKaanto(vasenKeski, puoli);
+            }
+
+            else if (takaYla == takaKeski) {
+                int puoli = 1;
+                if (takaKeski > takaPaa) {
+                    puoli = 2;
+                }
+                keskiKaanto(takaKeski, puoli);
+            } else if (oikeaYla == oikeaKeski) {
+                int puoli = 1;
+                if (oikeaKeski > oikeaPaa) {
+                    puoli = 2;
+                }
+                keskiKaanto(oikeaKeski, puoli);
+            } 
+        }
+
+        public void ratkaiseKeskiReunaJumi(){
+            //TODO Poista turhat jos ei tarvi
+
+            int etuYla = tila[6][4];
+            int etuKeski = tila[7][4];
+            int etuPaa = tila[5][4];
+            int vasenYla = tila[4][2];
+            int vasenKeski = tila[4][1];
+            int vasenPaa = tila[4][3];
+            int takaYla = tila[2][4];
+            int takaKeski = tila[1][4];
+            int takaPaa = tila[3][4];
+            int oikeaYla = tila[4][6];
+            int oikeaKeski = tila[4][7];
+            int oikeaPaa = tila[4][5];
+
+            //TODO otettu elset pois, tarkasta vaikutus
+            // etusivu
+            if (!(tila[7][3] == tila[7][4])) {
+                keskiKaanto(tila[7][4], 1);
+            }
+            if (!(tila[7][4] == tila[7][5])) {
+                keskiKaanto(tila[7][4], 2);
+            }
+            // vasen sivu
+            if (!(tila[3][1] == tila[4][1])) {
+                keskiKaanto(tila[4][1], 1);
+            }
+            if (!(tila[4][1] == tila[5][1])) {
+                keskiKaanto(tila[4][1], 2);
+            }
+            // takasivu
+            if (!(tila[1][4] == tila[1][5])) {
+                keskiKaanto(tila[1][4], 1);
+            }
+            if (!(tila[1][3] == tila[1][4])) {
+                keskiKaanto(tila[1][4], 2);
+            }
+            // oikea sivu
+            if (!(tila[4][7] == tila[5][7])) {
+                keskiKaanto(tila[4][7], 1);
+            } 
+            if (!(tila[3][7] == tila[4][7])) {
+                keskiKaanto(tila[4][7], 2);
+            }
+        }
+
+        /*
+         * Kääntää keskiriviä ratkaistaessa ylhäällä keskellä olevan sivupalan halutulle
+         * puolelle sivuun
+         */
+        public void keskiKaanto(int sivu, int puoli) {
+
+            // Sininen puoli
+            if (sivu == 2 && puoli == 1) {
+                liikutaUi();
+                liikutaLi(); // m
+                liikutaU();
+                liikutaL(); // m
+                liikutaU();
+                liikutaF(); // m
+                liikutaUi();
+                liikutaFi(); // m
+
+            } else if (sivu == 2 && puoli == 2) {
+                liikutaU();
+                liikutaR(); // m
+                liikutaUi();
+                liikutaRi(); // m
+                liikutaUi();
+                liikutaFi(); // m
+                liikutaU();
+                liikutaF(); // m
+            }
+            // Punainen puoli
+            else if (sivu == 3 && puoli == 1) {
+                liikutaUi();
+                liikutaBi(); // m
+                liikutaU();
+                liikutaB(); // m
+                liikutaU();
+                liikutaL(); // m
+                liikutaUi();
+                liikutaLi(); // m
+
+            } else if (sivu == 3 && puoli == 2) {
+                liikutaU();
+                liikutaF(); // m
+                liikutaUi();
+                liikutaFi(); // m
+                liikutaUi();
+                liikutaLi(); // m
+                liikutaU();
+                liikutaL(); // m
+            }
+            // Vihreä puoli
+            else if (sivu == 4 && puoli == 1) {
+                liikutaUi();
+                liikutaRi(); // m
+                liikutaU();
+                liikutaR(); // m
+                liikutaU();
+                liikutaB(); // m
+                liikutaUi();
+                liikutaBi(); // m
+            } else if (sivu == 4 && puoli == 2) {
+                liikutaU();
+                liikutaL(); // m
+                liikutaUi();
+                liikutaLi(); // m
+                liikutaUi();
+                liikutaBi(); // m
+                liikutaU();
+                liikutaB(); // m
+            }
+            // Oranssi (violetti) puoli
+            else if (sivu == 5 && puoli == 1) {
+                liikutaUi();
+                liikutaFi(); // m
+                liikutaU();
+                liikutaF(); // m
+                liikutaU();
+                liikutaR(); // m
+                liikutaUi();
+                liikutaRi(); // m
+            } else if (sivu == 5 && puoli == 2) {
+                liikutaU();
+                liikutaB(); // m
+                liikutaUi();
+                liikutaBi(); // m
+                liikutaUi();
+                liikutaRi(); // m
+                liikutaU();
+                liikutaR(); // m
             }
         }
     }

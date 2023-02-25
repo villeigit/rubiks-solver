@@ -2,6 +2,7 @@ Rubiks.java BUGIT
 
 1# Whitecrossin ratkaisu jää looppiin monimutkaisemmissa tilanteissa
     -Toistuu n. 1/3 kierroksista tilanteissa
+    !PUUTTUU toimenpide tilanteelle, jossa Whitecrossiin kuuluva pala on sivulla alhaalla (jumiutuu tähän)
 
 2# Ylakulman ratkaiseminen alareunan ratkaisussa ei onnistu joka kerralla
     -Ainakin havaittu [3][2] ja [3][6] molempien ollessa valkoisena

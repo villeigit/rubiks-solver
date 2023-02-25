@@ -32,7 +32,7 @@ public class Rubiks {
 
             String syote = lukija.nextLine();
 
-            if(syote.charAt(0) == ('-')) {
+            if (syote.charAt(0) == ('-')) {
                 if (syote.contains("D")) {
                     kuutio.liikutaD();
                     kuutio.tulostaKuutio();
@@ -877,6 +877,7 @@ public class Rubiks {
             while (!(tarkastaWhitecross())) {
                 ratkaiseWhitecrossYla();
                 ratkaiseWhitecrossSivu();
+                ratkaiseWhitecrossAlaSivu();
                 ratkaiseWhitecrossAla();
                 System.out.println("Ratkaistaan Whitecrossia");
                 this.tulostaKuutio();
@@ -982,6 +983,35 @@ public class Rubiks {
                 }
             }
 
+        }
+
+        /*
+         * Ratkaisee Whitecrossin sivulla alareunassaolevan palan osalta
+         */
+        public void ratkaiseWhitecrossAlaSivu() {
+
+            // Tallennetaan tilat tekstimuotoon käsittelyn helpottamiseksi
+            int etuAla = tila[8][4];
+            int vasenAla = tila[4][0];
+            int takaAla = tila[0][4];
+            int oikeaAla = tila[4][8];
+
+            if(etuAla == 6) {
+                liikutaF();
+                liikutaF();
+            }
+            if(vasenAla == 6) {
+                liikutaL();
+                liikutaL();
+            }
+            if(takaAla == 6) {
+                liikutaB();
+                liikutaB();
+            }
+            if(oikeaAla == 6) {
+                liikutaR();
+                liikutaR();
+            }
         }
 
         /*
@@ -1103,6 +1133,7 @@ public class Rubiks {
                 liikutaB();
                 liikutaB();
             }
+            // TODO Tarkasta onko else if:llä vaikutusta?
             if (tila[4][9] == 6 && tila[4][7] != tila[4][8]) {
                 liikutaR();
                 liikutaR();

@@ -9,7 +9,12 @@ Rubiks.java BUGIT
     -Toistuu myös [5][2] ja [5][6]
     -Asioita liikkuu, mutta ei päädy oikealle paikalle
     -Toistuu vain harvoin, ei estä toimintaa
-    !Koodissa muutoksia, seurattava vaikuttiko 
+    +Koodissa muutoksia, seurattava vaikuttiko
+    +Vaikuttaisi poistuneen
 3# Alareuna jumittuu kun valkoinen [3][8], [5][8], [8][5]
 4# Alareunan ratkaisu rikkoo Whitecrossin (valkoinen ruudussa [5][1])
 5# Keskireunan ratkaisu jää looppiin
+6# Liikaa numeroita whitecrossia ratkaistaessa
+    -jotain luetaan/tallennetaan väärään paikkaan jolloin lukuja on väärä määrä väärillä paikoilla
+    -tämä lienee ihan perussiirroissa, sillä muualla ei tehdä numeroiden muutoksia, vaan kaikki menee "liikutaX" metodeiden kautta
+    + alaosan kierrossa virhe, korjattu, tekee samaa

@@ -18,3 +18,4 @@ Rubiks.java BUGIT
     -jotain luetaan/tallennetaan väärään paikkaan jolloin lukuja on väärä määrä väärillä paikoilla
     -tämä lienee ihan perussiirroissa, sillä muualla ei tehdä numeroiden muutoksia, vaan kaikki menee "liikutaX" metodeiden kautta
     + alaosan kierrossa virhe, korjattu, tekee samaa
+7# Tyhjän syöttö kaataa ohjelman (yrittää lukea tyhjää)
